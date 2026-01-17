@@ -1,0 +1,2 @@
+total_anomalies,detection_date,parameters,by_detection_level,by_metric,severity_distribution
+132,2026-01-11T20:47:30.723655,"{'iqr_multiplier': 1.5, 'mad_threshold': 3.0, 'rolling_window': 30}","{'temporal': 51, 'geographic': 63, 'age_group': 8, 'ratio': 10}","{'bio_total': 37, 'demo_total': 32, 'enrol_total': 45, 'bio_age_ratio_5_17': 8, 'bio_demo_ratio': 10}","{'high': 124, 'medium': 1, 'low': 7}"

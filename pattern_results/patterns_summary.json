@@ -1,0 +1,377 @@
+{
+  "daily_aggregated": {
+    "bio_total": {
+      "trend_direction": "decreasing",
+      "trend_slope": -14382.813935137692,
+      "trend_mean": 593574.4260869565,
+      "seasonal_amplitude": 0.0,
+      "resid_std": 1709648.5086956818
+    },
+    "demo_total": {
+      "trend_direction": "decreasing",
+      "trend_slope": -3708.9993056103535,
+      "trend_mean": 318239.64347826084,
+      "seasonal_amplitude": 0.0,
+      "resid_std": 771768.345835413
+    },
+    "enrol_total": {
+      "trend_direction": "decreasing",
+      "trend_slope": -429.1192929850864,
+      "trend_mean": 46363.13043478261,
+      "seasonal_amplitude": 0.0,
+      "resid_std": 69882.69914756801
+    }
+  },
+  "state_biometric": {
+    "Andaman & Nicobar Islands": {
+      "trend_direction": "increasing",
+      "trend_slope": 0.05809736016205227,
+      "trend_mean": 4.778420547099657,
+      "seasonal_amplitude": 3.4475468352222904,
+      "resid_std": 25.92271562797339
+    },
+    "Andaman And Nicobar Islands": {
+      "trend_direction": "increasing",
+      "trend_slope": 0.26993749897929076,
+      "trend_mean": 25.31512264289473,
+      "seasonal_amplitude": 29.555555667989545,
+      "resid_std": 290.39888826159137
+    },
+    "Andhra Pradesh": {
+      "trend_direction": "increasing",
+      "trend_slope": 68.40432781153648,
+      "trend_mean": 5064.495269395273,
+      "seasonal_amplitude": 6126.561127855238,
+      "resid_std": 61795.088167874484
+    },
+    "Arunachal Pradesh": {
+      "trend_direction": "increasing",
+      "trend_slope": 0.9975354837412905,
+      "trend_mean": 88.94779249197306,
+      "seasonal_amplitude": 123.08705563432541,
+      "resid_std": 1020.1038529402618
+    },
+    "Assam": {
+      "trend_direction": "increasing",
+      "trend_slope": 20.31824563362557,
+      "trend_mean": 1700.8813685236798,
+      "seasonal_amplitude": 1782.1553048250858,
+      "resid_std": 12816.62014026993
+    },
+    "Bihar": {
+      "trend_direction": "increasing",
+      "trend_slope": 54.788220238052,
+      "trend_mean": 5419.374118403453,
+      "seasonal_amplitude": 4837.867588071025,
+      "resid_std": 82749.05240617754
+    },
+    "Chandigarh": {
+      "trend_direction": "increasing",
+      "trend_slope": 0.64129586809067,
+      "trend_mean": 17.205669263126747,
+      "seasonal_amplitude": 181.00739834124803,
+      "resid_std": 1953.2660248680895
+    },
+    "Chhatisgarh": {
+      "trend_direction": "increasing",
+      "trend_slope": 0.00022745593830994406,
+      "trend_mean": 0.016314758474753766,
+      "seasonal_amplitude": 0.11232444847647075,
+      "resid_std": 0.0006220490407958219
+    },
+    "Chhattisgarh": {
+      "trend_direction": "increasing",
+      "trend_slope": 49.613426099480016,
+      "trend_mean": 3707.347221226748,
+      "seasonal_amplitude": 3999.569557862574,
+      "resid_std": 37781.88526585123
+    },
+    "Dadra & Nagar Haveli": {
+      "trend_direction": "increasing",
+      "trend_slope": 0.008861273381993127,
+      "trend_mean": 0.8246632208641552,
+      "seasonal_amplitude": 0.9873445491892878,
+      "resid_std": 10.398133407389244
+    },
+    "Dadra And Nagar Haveli": {
+      "trend_direction": "increasing",
+      "trend_slope": 0.20155971263614592,
+      "trend_mean": 64.50094060654503,
+      "seasonal_amplitude": 371.38345967020973,
+      "resid_std": 519.1327580741766
+    },
+    "Dadra And Nagar Haveli And Daman And Diu": {
+      "trend_direction": "increasing",
+      "trend_slope": 0.014777100508942851,
+      "trend_mean": 1.2385927540346182,
+      "seasonal_amplitude": 3.3587633695075514,
+      "resid_std": 52.61942546604953
+    },
+    "Daman & Diu": {
+      "trend_direction": "increasing",
+      "trend_slope": 0.040408255034916137,
+      "trend_mean": 2.9368734021697436,
+      "seasonal_amplitude": 5.531343793101468,
+      "resid_std": 36.29283218849639
+    },
+    "Daman And Diu": {
+      "trend_direction": "increasing",
+      "trend_slope": 0.10187634510262593,
+      "trend_mean": 8.134296095530127,
+      "seasonal_amplitude": 13.85187853634063,
+      "resid_std": 106.65485458035543
+    },
+    "Delhi": {
+      "trend_direction": "increasing",
+      "trend_slope": 13.776971437776478,
+      "trend_mean": 1192.7592010346152,
+      "seasonal_amplitude": 983.2553152305206,
+      "resid_std": 24541.592178456198
+    },
+    "Goa": {
+      "trend_direction": "increasing",
+      "trend_slope": 0.7509304173033572,
+      "trend_mean": 94.595492017553,
+      "seasonal_amplitude": 339.2026126758735,
+      "resid_std": 987.8687786761972
+    },
+    "Gujarat": {
+      "trend_direction": "increasing",
+      "trend_slope": 28.405683120098434,
+      "trend_mean": 2342.2664685237282,
+      "seasonal_amplitude": 3209.80693389913,
+      "resid_std": 56677.16536543963
+    },
+    "Haryana": {
+      "trend_direction": "increasing",
+      "trend_slope": 24.64401241931878,
+      "trend_mean": 2024.9003016080308,
+      "seasonal_amplitude": 2059.7300996156005,
+      "resid_std": 26276.084276787846
+    },
+    "Himachal Pradesh": {
+      "trend_direction": "increasing",
+      "trend_slope": 5.114238726549527,
+      "trend_mean": 578.7989795498083,
+      "seasonal_amplitude": 1394.4278782193803,
+      "resid_std": 5602.91876984664
+    },
+    "Jammu & Kashmir": {
+      "trend_direction": "increasing",
+      "trend_slope": 0.016278468843621927,
+      "trend_mean": 1.3308927717725978,
+      "seasonal_amplitude": 1.5243317973120114,
+      "resid_std": 0.040211688422617776
+    },
+    "Jammu And Kashmir": {
+      "trend_direction": "increasing",
+      "trend_slope": 10.643515909553345,
+      "trend_mean": 723.2589151452697,
+      "seasonal_amplitude": 1175.9579535374596,
+      "resid_std": 11525.236530837668
+    },
+    "Jharkhand": {
+      "trend_direction": "increasing",
+      "trend_slope": 20.564394443838584,
+      "trend_mean": 1400.5055655276615,
+      "seasonal_amplitude": 1822.4120504487053,
+      "resid_std": 36630.27853200543
+    },
+    "Karnataka": {
+      "trend_direction": "increasing",
+      "trend_slope": 29.689715511162138,
+      "trend_mean": 2652.1545607705934,
+      "seasonal_amplitude": 4221.045057446055,
+      "resid_std": 42538.02704879482
+    },
+    "Kerala": {
+      "trend_direction": "increasing",
+      "trend_slope": 24.069464804687865,
+      "trend_mean": 2355.7140051110314,
+      "seasonal_amplitude": 2292.7871744190293,
+      "resid_std": 27147.02833084761
+    },
+    "Ladakh": {
+      "trend_direction": "increasing",
+      "trend_slope": 0.05409128533644777,
+      "trend_mean": 4.613096908300251,
+      "seasonal_amplitude": 6.245633222830805,
+      "resid_std": 95.59936062274497
+    },
+    "Lakshadweep": {
+      "trend_direction": "increasing",
+      "trend_slope": 0.004319999305152429,
+      "trend_mean": 9.115883507553667,
+      "seasonal_amplitude": 24.732218304981735,
+      "resid_std": 70.32593985237679
+    },
+    "Madhya Pradesh": {
+      "trend_direction": "increasing",
+      "trend_slope": 68.95054925303549,
+      "trend_mean": 7235.797604206695,
+      "seasonal_amplitude": 10175.204267655698,
+      "resid_std": 106800.05814384989
+    },
+    "Maharashtra": {
+      "trend_direction": "increasing",
+      "trend_slope": 171.1661547907131,
+      "trend_mean": 13874.62040459928,
+      "seasonal_amplitude": 12244.326967056084,
+      "resid_std": 128450.27288665644
+    },
+    "Manipur": {
+      "trend_direction": "increasing",
+      "trend_slope": 5.173922408751462,
+      "trend_mean": 403.92644437906586,
+      "seasonal_amplitude": 326.91719486709246,
+      "resid_std": 5262.729129698953
+    },
+    "Meghalaya": {
+      "trend_direction": "decreasing",
+      "trend_slope": -0.3341385250555977,
+      "trend_mean": 145.05253370749122,
+      "seasonal_amplitude": 818.0880654635422,
+      "resid_std": 1216.4693922062359
+    },
+    "Mizoram": {
+      "trend_direction": "increasing",
+      "trend_slope": 0.35243721812139067,
+      "trend_mean": 69.09674444444408,
+      "seasonal_amplitude": 193.71652509714465,
+      "resid_std": 3325.0416089473647
+    },
+    "Nagaland": {
+      "trend_direction": "increasing",
+      "trend_slope": 1.212755430518683,
+      "trend_mean": 192.04665614784224,
+      "seasonal_amplitude": 662.0112693839689,
+      "resid_std": 1645.7782783470095
+    },
+    "Odisha": {
+      "trend_direction": "increasing",
+      "trend_slope": 30.64738285596717,
+      "trend_mean": 2673.570917582846,
+      "seasonal_amplitude": 3830.986837474176,
+      "resid_std": 38773.966550387566
+    },
+    "Orissa": {
+      "trend_direction": "increasing",
+      "trend_slope": 1.1628830848543403,
+      "trend_mean": 100.02439459667258,
+      "seasonal_amplitude": 110.37084677381945,
+      "resid_std": 851.329000779738
+    },
+    "Pondicherry": {
+      "trend_direction": "increasing",
+      "trend_slope": 0.4173536008804232,
+      "trend_mean": 54.441423727111356,
+      "seasonal_amplitude": 87.23055653838993,
+      "resid_std": 289.31098749145906
+    },
+    "Puducherry": {
+      "trend_direction": "increasing",
+      "trend_slope": 0.7634719831022613,
+      "trend_mean": 71.89852892216584,
+      "seasonal_amplitude": 56.41916251241474,
+      "resid_std": 541.8027093899718
+    },
+    "Punjab": {
+      "trend_direction": "increasing",
+      "trend_slope": 20.319083271553392,
+      "trend_mean": 2929.4961460728136,
+      "seasonal_amplitude": 7945.32571006794,
+      "resid_std": 27875.861046935872
+    },
+    "Rajasthan": {
+      "trend_direction": "increasing",
+      "trend_slope": 54.86144267181221,
+      "trend_mean": 4546.853881956235,
+      "seasonal_amplitude": 4534.473016787311,
+      "resid_std": 57816.88937340727
+    },
+    "Sikkim": {
+      "trend_direction": "increasing",
+      "trend_slope": 0.22945437944417932,
+      "trend_mean": 20.379458221367283,
+      "seasonal_amplitude": 29.941250108236733,
+      "resid_std": 444.13573719419526
+    },
+    "Tamil Nadu": {
+      "trend_direction": "increasing",
+      "trend_slope": 80.65695923060801,
+      "trend_mean": 6035.247934095042,
+      "seasonal_amplitude": 6512.222297934793,
+      "resid_std": 70428.48190308864
+    },
+    "Tamilnadu": {
+      "trend_direction": "increasing",
+      "trend_slope": 6.258548471002774e-05,
+      "trend_mean": 0.0032204342866380535,
+      "seasonal_amplitude": 0.052127828904674094,
+      "resid_std": 1.5877886101671302e-14
+    },
+    "Telangana": {
+      "trend_direction": "increasing",
+      "trend_slope": 33.44076184026044,
+      "trend_mean": 2484.524339592282,
+      "seasonal_amplitude": 4761.129202032249,
+      "resid_std": 24085.117990658335
+    },
+    "Tripura": {
+      "trend_direction": "decreasing",
+      "trend_slope": -0.8492760084761207,
+      "trend_mean": 444.98998199427507,
+      "seasonal_amplitude": 272.82086803890655,
+      "resid_std": 4111.416501885546
+    },
+    "Uttar Pradesh": {
+      "trend_direction": "increasing",
+      "trend_slope": 134.27424315671942,
+      "trend_mean": 17732.942193845483,
+      "seasonal_amplitude": 67162.57686587468,
+      "resid_std": 124400.36453433931
+    },
+    "Uttarakhand": {
+      "trend_direction": "increasing",
+      "trend_slope": 12.757755670308205,
+      "trend_mean": 1058.3876410737314,
+      "seasonal_amplitude": 2503.369399558704,
+      "resid_std": 9264.25514651949
+    },
+    "Uttaranchal": {
+      "trend_direction": "increasing",
+      "trend_slope": 7.232998318474394e-05,
+      "trend_mean": 0.006448503212741627,
+      "seasonal_amplitude": 0.07337171295646111,
+      "resid_std": 0.0005614440747392933
+    },
+    "West  Bengal": {
+      "trend_direction": "increasing",
+      "trend_slope": 0.0009174468000661738,
+      "trend_mean": 0.07820812304366855,
+      "seasonal_amplitude": 0.2670077093893723,
+      "resid_std": 0.003959904410475989
+    },
+    "West Bangal": {
+      "trend_direction": "increasing",
+      "trend_slope": 0.001880189207104354,
+      "trend_mean": 0.19208625771674012,
+      "seasonal_amplitude": 0.4090254439223995,
+      "resid_std": 0.14068671115373085
+    },
+    "West Bengal": {
+      "trend_direction": "increasing",
+      "trend_slope": 19.497720094941332,
+      "trend_mean": 5041.843596275094,
+      "seasonal_amplitude": 20547.695089710935,
+      "resid_std": 34368.50732330699
+    },
+    "Westbengal": {
+      "trend_direction": "increasing",
+      "trend_slope": 0.0012325343968823826,
+      "trend_mean": 0.10037613034243292,
+      "seasonal_amplitude": 0.3095939113750542,
+      "resid_std": 0.012432055888065513
+    }
+  }
+}

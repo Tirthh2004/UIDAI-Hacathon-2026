@@ -1,0 +1,10 @@
+Collecting pandas
+  Downloading pandas-2.3.3-cp314-cp314-win_amd64.whl.metadata (19 kB)
+Collecting numpy
+  Downloading numpy-2.4.1-cp314-cp314-win_amd64.whl.metadata (6.6 kB)
+Collecting python-dateutil
+  Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting matplotlib
+  Downloading matplotlib-3.10.8-cp314-cp314-win_amd64.whl.metadata (52 kB)
+Collecting seaborn
+  Downloading seaborn-0.13.2-py3-none-any.whl.metadata (5.4 kB)

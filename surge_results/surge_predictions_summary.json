@@ -1,0 +1,18 @@
+{
+  "total_predictions": 7,
+  "prediction_date": "2026-01-11T20:53:06.927998",
+  "parameters": {
+    "surge_threshold_multiplier": 1.5,
+    "forecast_horizon_days": 90,
+    "min_confidence": 0.5
+  },
+  "by_surge_type": {
+    "regional_pattern": 7
+  },
+  "by_priority": {
+    "High": 7
+  },
+  "upcoming_surges_30_days": 0,
+  "upcoming_surges_60_days": 7,
+  "upcoming_surges_90_days": 7
+}

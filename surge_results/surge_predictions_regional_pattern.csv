@@ -1,0 +1,8 @@
+surge_type,subtype,state,district,predicted_date,days_until_surge,expected_magnitude,estimated_volume,confidence,affected_population,metric,priority
+regional_pattern,high_activity_state,Uttar Pradesh,,2026-02-14,45,7.233464118978875,9367083.0,0.8,,bio_total,High
+regional_pattern,high_activity_state,Maharashtra,,2026-02-14,45,6.929009715480682,9020710.0,0.8,,bio_total,High
+regional_pattern,high_activity_state,Madhya Pradesh,,2026-02-14,45,4.115422542741389,5819736.0,0.8,,bio_total,High
+regional_pattern,high_activity_state,Bihar,,2026-02-14,45,3.200609896778777,4778968.0,0.8,,bio_total,High
+regional_pattern,high_activity_state,Tamil Nadu,,2026-02-14,45,3.018822210185752,4572151.0,0.8,,bio_total,High
+regional_pattern,high_activity_state,Rajasthan,,2026-02-14,45,2.4526247241490937,3927997.0,0.8,,bio_total,High
+regional_pattern,high_activity_state,Andhra Pradesh,,2026-02-14,45,2.17379430049569,3610776.0,0.8,,bio_total,High

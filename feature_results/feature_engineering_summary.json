@@ -1,0 +1,47 @@
+{
+  "feature_engineering_date": "2026-01-11T20:59:03.318358",
+  "parameters": {
+    "lag_periods": [
+      1,
+      7,
+      30
+    ],
+    "rolling_windows": [
+      7,
+      14,
+      30
+    ]
+  },
+  "feature_counts": {
+    "daily": {
+      "num_rows": 115,
+      "num_columns": 105,
+      "num_features_created": 90
+    },
+    "state": {
+      "num_rows": 60,
+      "num_columns": 27,
+      "num_features_created": 14
+    }
+  },
+  "feature_types": {
+    "daily": {
+      "lag_features": 9,
+      "rolling_features": 45,
+      "seasonal_features": 9,
+      "z_score_features": 3,
+      "iqr_features": 18,
+      "scaled_features": 0,
+      "geographic_features": 0
+    },
+    "state": {
+      "lag_features": 0,
+      "rolling_features": 0,
+      "seasonal_features": 0,
+      "z_score_features": 0,
+      "iqr_features": 0,
+      "scaled_features": 10,
+      "geographic_features": 4
+    }
+  }
+}

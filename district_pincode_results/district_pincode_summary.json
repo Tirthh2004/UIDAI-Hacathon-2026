@@ -1,0 +1,25 @@
+{
+  "modeling_date": "2026-01-11T22:09:05.540736",
+  "parameters": {
+    "high_volume_threshold_percentile": 75,
+    "min_data_points_district": 20,
+    "min_data_points_pincode": 10,
+    "top_districts_per_state": 10,
+    "top_pincodes_overall": 100
+  },
+  "summary": {
+    "district_forecasts": {
+      "total_forecasts": 638,
+      "unique_states": 47,
+      "unique_districts": 353,
+      "high_volume_count": 269,
+      "low_volume_count": 369
+    },
+    "pincode_anomalies": {
+      "total_anomalies": 200,
+      "unique_pincodes": 143,
+      "unique_states": 13,
+      "high_severity": 200
+    }
+  }
+}

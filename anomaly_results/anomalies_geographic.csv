@@ -1,0 +1,64 @@
+detection_level,metric,date,value,iqr_anomaly,mad_anomaly,iqr_deviation,mad_z_score,severity,lower_bound,upper_bound,state
+geographic,bio_total,,3610776,False,True,0.0,21.82009275508225,1.0,-2562620.0,4286124.0,Andhra Pradesh
+geographic,bio_total,,945150,False,True,0.0,5.213633500817409,1.0,-2979762.5,4981361.5,Assam
+geographic,bio_total,,4778968,True,True,0.2878448953559952,29.097757682254382,1.0,-2562620.0,4286124.0,Bihar
+geographic,bio_total,,2559106,False,True,0.0,15.26834280819071,1.0,-2562620.0,4286124.0,Chhattisgarh
+geographic,bio_total,,1281944,False,True,0.0,7.3118107537707,1.0,-2979762.5,4981361.5,Delhi
+geographic,bio_total,,3147888,False,True,0.0,18.936368364905928,1.0,-2562620.0,4286124.0,Gujarat
+geographic,bio_total,,1600264,False,True,0.0,9.294897694630965,1.0,-2979762.5,4981361.5,Haryana
+geographic,bio_total,,771184,False,True,0.0,4.129850820641181,1.0,-2979762.5,4981361.5,Jammu And Kashmir
+geographic,bio_total,,1995940,False,True,0.0,11.75990117669878,1.0,-2562620.0,4286124.0,Jharkhand
+geographic,bio_total,,2602087,False,True,0.0,15.536108138063527,1.0,-2562620.0,4286124.0,Karnataka
+geographic,bio_total,,1585769,False,True,0.0,9.20459596929869,1.0,-2979762.5,4981361.5,Kerala
+geographic,bio_total,,5819736,True,True,0.8957040882240598,35.581589767154036,1.0,-2562620.0,4286124.0,Madhya Pradesh
+geographic,bio_total,,9020710,True,True,2.7652287777145705,55.52318859045525,1.0,-2562620.0,4286124.0,Maharashtra
+geographic,bio_total,,2362631,False,True,0.0,14.044332357369147,1.0,-2562620.0,4286124.0,Odisha
+geographic,bio_total,,1717845,False,True,0.0,10.027410089684027,1.0,-2979762.5,4981361.5,Punjab
+geographic,bio_total,,3927997,False,True,0.0,23.796333087033222,1.0,-2562620.0,4286124.0,Rajasthan
+geographic,bio_total,,4572151,True,True,0.16705369626898012,27.80931808735649,1.0,-2562620.0,4286124.0,Tamil Nadu
+geographic,bio_total,,1678277,False,True,0.0,9.780907249535879,1.0,-2979762.5,4981361.5,Telangana
+geographic,bio_total,,9367083,True,True,2.967527476570887,57.68104160932492,1.0,-2562620.0,4286124.0,Uttar Pradesh
+geographic,bio_total,,740794,False,True,0.0,3.940525575187727,1.0,-2979762.5,4981361.5,Uttarakhand
+geographic,bio_total,,2482087,False,True,0.0,14.78852572758592,1.0,-2562620.0,4286124.0,West Bengal
+geographic,demo_total,,1642142,False,True,0.0,39.52380530957392,1.0,-1238349.5,2064358.5,Andhra Pradesh
+geographic,demo_total,,755097,False,True,0.0,17.809649379400447,1.0,-1244846.0,2075186.0,Assam
+geographic,demo_total,,3638844,True,True,1.9069024570140625,88.40148183566814,1.0,-1238349.5,2064358.5,Bihar
+geographic,demo_total,,1421367,False,True,0.0,34.1194089424403,1.0,-1238349.5,2064358.5,Chhattisgarh
+geographic,demo_total,,969666,False,True,0.0,23.06212780358569,1.0,-1238349.5,2064358.5,Delhi
+geographic,demo_total,,1358115,False,True,0.0,32.571050301226684,1.0,-1238349.5,2064358.5,Gujarat
+geographic,demo_total,,825843,False,True,0.0,19.54145517892139,1.0,-1244846.0,2075186.0,Haryana
+geographic,demo_total,,294435,False,True,0.0,6.533010089279234,1.0,-1244846.0,2075186.0,Jammu And Kashmir
+geographic,demo_total,,1065328,False,True,0.0,25.40385746171155,1.0,-1238349.5,2064358.5,Jharkhand
+geographic,demo_total,,1254788,False,True,0.0,30.041687540828917,1.0,-1238349.5,2064358.5,Karnataka
+geographic,demo_total,,573781,False,True,0.0,13.371177941496697,1.0,-1244846.0,2075186.0,Kerala
+geographic,demo_total,,2104635,True,True,0.04877997086027587,50.84526602308195,1.0,-1238349.5,2064358.5,Madhya Pradesh
+geographic,demo_total,,3824891,True,True,2.1322290677831646,92.95576438992524,1.0,-1238349.5,2064358.5,Maharashtra
+geographic,demo_total,,233382,False,True,0.0,5.0384812186978305,1.0,-1244846.0,2075186.0,Manipur
+geographic,demo_total,,830174,False,True,0.0,19.647474613486246,1.0,-1238349.5,2064358.5,Odisha
+geographic,demo_total,,642172,False,True,0.0,15.045335214487915,1.0,-1244846.0,2075186.0,Punjab
+geographic,demo_total,,2058896,False,True,0.0,49.72561168977281,1.0,-1238349.5,2064358.5,Rajasthan
+geographic,demo_total,,1686594,False,True,0.0,40.611954906728606,1.0,-1238349.5,2064358.5,Tamil Nadu
+geographic,demo_total,,1235593,False,True,0.0,29.571809211003846,1.0,-1238349.5,2064358.5,Telangana
+geographic,demo_total,,6460511,True,True,5.324300543675069,157.47364527836248,1.0,-1238349.5,2064358.5,Uttar Pradesh
+geographic,demo_total,,337418,False,True,0.0,7.585199735065689,1.0,-1244846.0,2075186.0,Uttarakhand
+geographic,demo_total,,2844037,True,True,0.9442899584219979,68.94523876751107,1.0,-1238349.5,2064358.5,West Bengal
+geographic,enrol_total,,124273,False,True,0.0,6.260256319556493,1.0,-177904.875,298002.125,Andhra Pradesh
+geographic,enrol_total,,225359,False,True,0.0,11.901934942699931,1.0,-176151.75,295080.25,Assam
+geographic,enrol_total,,593753,True,True,2.535250152790982,32.46225540937487,1.0,-176151.75,295080.25,Bihar
+geographic,enrol_total,,99773,False,True,0.0,4.892894605105291,1.0,-186762.0,312764.0,Chhattisgarh
+geographic,enrol_total,,92838,False,True,0.0,4.5058475238922675,1.0,-186762.0,312764.0,Delhi
+geographic,enrol_total,,275042,False,True,0.0,14.6747770675603,1.0,-176151.75,295080.25,Gujarat
+geographic,enrol_total,,95085,False,True,0.0,4.631254126846221,1.0,-186762.0,312764.0,Haryana
+geographic,enrol_total,,153612,False,True,0.0,7.897685925282364,1.0,-176151.75,295080.25,Jharkhand
+geographic,enrol_total,,219618,False,True,0.0,11.58152581606057,1.0,-176151.75,295080.25,Karnataka
+geographic,enrol_total,,73950,False,True,0.0,3.4516953580737244,1.0,-186762.0,312764.0,Kerala
+geographic,enrol_total,,487892,True,True,1.6366609228575308,26.554080778619003,1.0,-176151.75,295080.25,Madhya Pradesh
+geographic,enrol_total,,363446,True,True,0.5803150040744262,19.608664618758013,1.0,-176151.75,295080.25,Maharashtra
+geographic,enrol_total,,109239,False,True,0.0,5.421198523023458,1.0,-186762.0,312764.0,Meghalaya
+geographic,enrol_total,,116400,False,True,0.0,5.820858818418766,1.0,-186762.0,312764.0,Odisha
+geographic,enrol_total,,75773,False,True,0.0,3.5534382317653384,1.0,-186762.0,312764.0,Punjab
+geographic,enrol_total,,340591,True,True,0.3863128989542306,18.333111476562824,1.0,-176151.75,295080.25,Rajasthan
+geographic,enrol_total,,215710,False,True,0.0,11.363417669935044,1.0,-176151.75,295080.25,Tamil Nadu
+geographic,enrol_total,,128948,False,True,0.0,6.521171258946672,1.0,-176151.75,295080.25,Telangana
+geographic,enrol_total,,1002631,True,True,6.005965214586446,55.28201553514542,1.0,-176151.75,295080.25,Uttar Pradesh
+geographic,enrol_total,,369217,True,True,0.6293014905609127,19.93074806586405,1.0,-176151.75,295080.25,West Bengal

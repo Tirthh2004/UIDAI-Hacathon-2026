@@ -1,0 +1,61 @@
+state,volume_classification,forecast_total,num_districts
+Andaman & Nicobar Islands,low_volume,24.44498146097903,4
+Andaman And Nicobar Islands,low_volume,113.32072929898494,6
+Andhra Pradesh,high_volume,14918.91082738152,17
+Arunachal Pradesh,low_volume,415.79165059177416,20
+Assam,high_volume,2565.297114595141,3
+Assam,low_volume,5394.04808762696,17
+Bihar,high_volume,25147.357114998496,19
+Chandigarh,high_volume,138.02160405313663,1
+Chandigarh,low_volume,168.14552045708882,1
+Chhattisgarh,high_volume,16492.37620341426,17
+Chhattisgarh,low_volume,811.3459690801326,2
+Dadra & Nagar Haveli,low_volume,4.757729952920096,2
+Dadra And Nagar Haveli,low_volume,102.0,2
+Dadra And Nagar Haveli And Daman And Diu,low_volume,39.33136208933797,6
+Daman & Diu,low_volume,18.87628878873387,4
+Daman And Diu,low_volume,20.272687065471214,4
+Delhi,high_volume,14078.650004253173,13
+Delhi,low_volume,891.3342790253222,7
+Goa,low_volume,696.4070329654114,5
+Gujarat,high_volume,9077.948138022624,14
+Gujarat,low_volume,694.419992228885,3
+Haryana,high_volume,1380.6747045474563,4
+Haryana,low_volume,4614.562551582819,16
+Himachal Pradesh,low_volume,1695.3809808968906,20
+Jammu & Kashmir,low_volume,11.762614435700508,6
+Jammu And Kashmir,low_volume,3361.6505257205,17
+Jharkhand,high_volume,6668.417111126025,14
+Jharkhand,low_volume,1485.6542734089326,6
+Karnataka,high_volume,4144.978020782173,6
+Karnataka,low_volume,3290.7007457251184,11
+Kerala,high_volume,7668.467004259007,12
+Kerala,low_volume,3560.6057377919415,8
+Ladakh,low_volume,71.51006763776468,4
+Lakshadweep,low_volume,34.74117647058823,2
+Madhya Pradesh,high_volume,7048.46677476944,20
+Maharashtra,high_volume,39712.47490068448,20
+Manipur,low_volume,2599.235279986703,20
+Meghalaya,low_volume,171.45574416205392,20
+Mizoram,low_volume,324.36078003333756,20
+Nagaland,low_volume,310.0042064766768,20
+Odisha,high_volume,3242.3924831837876,7
+Odisha,low_volume,2950.9501740084697,13
+Orissa,low_volume,390.6234092407614,20
+Pondicherry,low_volume,175.25320121881418,6
+Puducherry,low_volume,216.74560522011984,7
+Punjab,high_volume,3849.5441649405143,9
+Punjab,low_volume,2154.563046015646,10
+Rajasthan,high_volume,16643.914420572306,16
+Sikkim,low_volume,338.330210886962,18
+Tamil Nadu,high_volume,16512.953527725753,19
+Telangana,high_volume,8801.417756086006,13
+Telangana,low_volume,1293.5827802856347,6
+Tripura,low_volume,1607.8561981082544,18
+Uttar Pradesh,high_volume,32335.534067823774,20
+Uttarakhand,high_volume,8155.676233309567,5
+Uttarakhand,low_volume,3598.2184829346284,12
+West  Bengal,low_volume,2.939130434617528,2
+West Bangal,low_volume,4.594635529619857,3
+West Bengal,high_volume,23269.868523002453,20
+Westbengal,low_volume,1.7475644526874454,1

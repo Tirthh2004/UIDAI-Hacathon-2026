@@ -1,0 +1,100 @@
+{
+  "total_insights": 60,
+  "generation_date": "2026-01-11T21:52:36.250024",
+  "by_insight_type": {
+    "operational_investigation": 1,
+    "resource_deployment": 7,
+    "targeted_campaign": 7,
+    "capacity_planning": 45
+  },
+  "by_priority": {
+    "High": 8,
+    "Medium": 52
+  },
+  "by_impact": {
+    "Medium": 53,
+    "High": 7
+  },
+  "top_insights": [
+    {
+      "insight_id": 15,
+      "insight_type": "operational_investigation",
+      "title": "Investigate Unusual Biometric/Demographic Ratios",
+      "priority": "High",
+      "impact": "Medium",
+      "state": null
+    },
+    {
+      "insight_id": 1,
+      "insight_type": "resource_deployment",
+      "title": "Deploy Additional Resources to Uttar Pradesh",
+      "priority": "High",
+      "impact": "High",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "insight_id": 2,
+      "insight_type": "resource_deployment",
+      "title": "Deploy Additional Resources to Maharashtra",
+      "priority": "High",
+      "impact": "High",
+      "state": "Maharashtra"
+    },
+    {
+      "insight_id": 3,
+      "insight_type": "resource_deployment",
+      "title": "Deploy Additional Resources to Madhya Pradesh",
+      "priority": "High",
+      "impact": "High",
+      "state": "Madhya Pradesh"
+    },
+    {
+      "insight_id": 4,
+      "insight_type": "resource_deployment",
+      "title": "Deploy Additional Resources to Bihar",
+      "priority": "High",
+      "impact": "High",
+      "state": "Bihar"
+    },
+    {
+      "insight_id": 5,
+      "insight_type": "resource_deployment",
+      "title": "Deploy Additional Resources to Tamil Nadu",
+      "priority": "High",
+      "impact": "High",
+      "state": "Tamil Nadu"
+    },
+    {
+      "insight_id": 6,
+      "insight_type": "resource_deployment",
+      "title": "Deploy Additional Resources to Rajasthan",
+      "priority": "High",
+      "impact": "High",
+      "state": "Rajasthan"
+    },
+    {
+      "insight_id": 7,
+      "insight_type": "resource_deployment",
+      "title": "Deploy Additional Resources to Andhra Pradesh",
+      "priority": "High",
+      "impact": "High",
+      "state": "Andhra Pradesh"
+    },
+    {
+      "insight_id": 8,
+      "insight_type": "targeted_campaign",
+      "title": "Pre-Surge Preparation Campaign in Uttar Pradesh",
+      "priority": "Medium",
+      "impact": "Medium",
+      "state": "Uttar Pradesh"
+    },
+    {
+      "insight_id": 9,
+      "insight_type": "targeted_campaign",
+      "title": "Pre-Surge Preparation Campaign in Maharashtra",
+      "priority": "Medium",
+      "impact": "Medium",
+      "state": "Maharashtra"
+    }
+  ]
+}
