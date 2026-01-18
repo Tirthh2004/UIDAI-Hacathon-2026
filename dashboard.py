@@ -1113,7 +1113,13 @@ def main():
         # Use normalized unique states from all data sources
         unique_states = get_unique_states(data)
         all_states = ['All'] + unique_states
-        selected_state = st.sidebar.selectbox("Select State", all_states)
+        # selected_state = st.sidebar.selectbox("Select State", all_states)
+        selected_state = st.sidebar.selectbox(
+            "Select State",
+            all_states,
+            format_func=lambda x: x.title() if x != 'All' else x
+        )
+
         
         # Apply state filter to all data
         if selected_state != 'All':
@@ -1693,7 +1699,18 @@ def main():
                     
                 state_forecasts_df = data['state_forecasts']
                 state_summary_df = data['state_forecasts_summary']
-                    
+
+                # --- Normalize state names (FIXES mismatch & iloc error) ---
+                for df in [state_forecasts_df, state_summary_df]:
+                    if 'state' in df.columns:
+                        df['state'] = (
+                            df['state']
+                            .astype(str)
+                            .str.strip()
+                            .str.lower()
+                        )
+
+
                 col1, col2 = st.columns(2)
                     
                 with col1:
@@ -1717,16 +1734,33 @@ def main():
                 with col2:
                     st.markdown("##### State Forecast Summary")
                     # State selector
-                    states = state_summary_df['state'].unique()
+                    # states = state_summary_df['state'].unique()
+                    states = sorted(state_summary_df['state'].dropna().unique())
+
                     selected_state_forecast = st.selectbox("Select State", states, key="state_forecast_select")
                         
-                    state_forecast_data = state_summary_df[state_summary_df['state'] == selected_state_forecast].iloc[0]
-                        
-                    st.metric("Forecast Periods", f"{int(state_forecast_data['forecast_periods'])} days")
-                    st.metric("MAE", f"{state_forecast_data['mae']:,.2f}")
-                    st.metric("RMSE", f"{state_forecast_data['rmse']:,.2f}")
-                    st.metric("MAPE", f"{state_forecast_data['mape']:.2f}%")
-                    st.info(f"**Model**: ARIMA{state_forecast_data['model_order']}")
+                    #state_forecast_data = state_summary_df[state_summary_df['state'] == selected_state_forecast].iloc[0]
+                    filtered_df = state_summary_df[
+                        state_summary_df['state'] == selected_state_forecast
+                    ]
+
+                    if not filtered_df.empty:
+                        state_forecast_data = filtered_df.iloc[0]
+
+                        st.metric("Forecast Periods", f"{int(state_forecast_data['forecast_periods'])} days")
+                        st.metric("MAE", f"{state_forecast_data['mae']:,.2f}")
+                        st.metric("RMSE", f"{state_forecast_data['rmse']:,.2f}")
+                        st.metric("MAPE", f"{state_forecast_data['mape']:.2f}%")
+                        st.info(f"**Model**: ARIMA{state_forecast_data['model_order']}")
+                    else:
+                        st.warning("No forecast summary available for this state.")
+                        st.stop()
+    
+                    # st.metric("Forecast Periods", f"{int(state_forecast_data['forecast_periods'])} days")
+                    # st.metric("MAE", f"{state_forecast_data['mae']:,.2f}")
+                    # st.metric("RMSE", f"{state_forecast_data['rmse']:,.2f}")
+                    # st.metric("MAPE", f"{state_forecast_data['mape']:.2f}%")
+                    # st.info(f"**Model**: ARIMA{state_forecast_data['model_order']}")
                         
                     # Forecast chart for selected state
                     state_fc = state_forecasts_df[state_forecasts_df['state'] == selected_state_forecast]
