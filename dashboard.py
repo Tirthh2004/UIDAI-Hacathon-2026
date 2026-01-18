@@ -16,6 +16,7 @@ from pathlib import Path
 from datetime import datetime, date
 import warnings
 import json
+from chatbot import display_chatbot
 warnings.filterwarnings('ignore')
 
 # Import Indian states coordinates and GeoJSON helper
@@ -1153,7 +1154,9 @@ def main():
                         (data[key]['date'] <= end_ts)
                     ]
 
-    
+
+
+
     # Dashboard tabs
     tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11 = st.tabs([
         "📈 Overview", 
@@ -3449,7 +3452,6 @@ def main():
             3. Refresh this dashboard to view the insights.
             """)
 
-
 def create_marker_fallback_map(state_map_data, map_metric_col, map_metric_choice):
     """Fallback marker-based map when GeoJSON is not available"""
     # Add coordinates for each state
@@ -3524,3 +3526,5 @@ def create_marker_fallback_map(state_map_data, map_metric_col, map_metric_choice
 
 if __name__ == "__main__":
     main()
+
+display_chatbot()
