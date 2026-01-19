@@ -46,11 +46,37 @@ st.set_page_config(
 st.markdown("""
     <style>
     /* Import professional font */
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     
     /* Global styles */
     * {
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    /* Variable definitions for easy maintenance */
+    :root {
+        --primary: #4E89E8;
+        --bg-dark: #0E1117;
+        --bg-secondary: #262730;
+        --text-main: #FAFAFA;
+        --text-muted: #A0AEC0;
+        
+        --saffron: #FF9933;
+        --green: #138808;
+        --navy: #000080;
+        --gold: #D4AF37;
+        
+        --success: #48BB78;
+        --danger: #F56565;
+        
+        --glass-bg: rgba(255, 255, 255, 0.05);
+        --glass-border: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Main background */
+    .stApp {
+        background-color: var(--bg-dark);
+        color: var(--text-main);
     }
     
     /* Smooth animations */
@@ -82,12 +108,12 @@ st.markdown("""
     
     /* Government header with emblem */
     .gov-header {
-        background: linear-gradient(135deg, #003366 0%, #004080 50%, #003366 100%);
+        background: linear-gradient(135deg, var(--navy) 0%, #001A33 50%, var(--navy) 100%);
         background-size: 200% 200%;
         animation: gradientShift 15s ease infinite;
         padding: 2rem 2rem;
-        border-bottom: 4px solid #D4AF37;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.1);
+        border-bottom: 4px solid var(--gold);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
         margin: -1rem -1rem 2rem -1rem;
         position: relative;
         overflow: hidden;
@@ -100,7 +126,7 @@ st.markdown("""
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
         animation: shimmer 3s infinite;
     }
     
@@ -147,7 +173,7 @@ st.markdown("""
     }
     
     .gov-title {
-        color: #FFFFFF;
+        color: var(--text-main);
         font-size: 1.2rem;
         font-weight: 400;
         margin: 0;
@@ -158,7 +184,7 @@ st.markdown("""
     }
     
     .main-header {
-        color: #FFFFFF !important;
+        color: var(--text-main) !important;
         font-size: 2.5rem !important;
         font-weight: 700 !important;
         margin: 0.5rem 0 0.3rem 0 !important;
@@ -177,11 +203,11 @@ st.markdown("""
         left: 0;
         width: 100%;
         height: 2px;
-        background: linear-gradient(90deg, #D4AF37 0%, transparent 100%);
+        background: linear-gradient(90deg, var(--saffron) 0%, var(--gold) 50%, var(--green) 100%);
     }
     
     .sub-header {
-        color: #FFD700;
+        color: var(--saffron);
         font-size: 1.3rem;
         font-weight: 400;
         margin: 0.5rem 0 0 0;
@@ -189,554 +215,151 @@ st.markdown("""
         text-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
     
-    /* Main content area with pattern */
-    .main .block-container {
-        padding-top: 1rem;
-        position: relative;
-    }
-    
-    .main .block-container::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: 
-            radial-gradient(circle at 20% 50%, rgba(212,175,55,0.03) 0%, transparent 50%),
-            radial-gradient(circle at 80% 50%, rgba(0,51,102,0.03) 0%, transparent 50%);
-        pointer-events: none;
-        z-index: 0;
-    }
-    
     /* Sidebar styling */
     section[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
-        border-right: 3px solid #003366;
-        box-shadow: 2px 0 15px rgba(0,0,0,0.08);
-        position: relative;
-    }
-    
-    section[data-testid="stSidebar"]::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 1px;
-        height: 100%;
-        background: linear-gradient(180deg, transparent 0%, #D4AF37 50%, transparent 100%);
-    }
-    
-    section[data-testid="stSidebar"] > div {
-        background: transparent;
+        background-color: var(--bg-secondary) !important;
+        border-right: 1px solid var(--glass-border);
+        box-shadow: 2px 0 15px rgba(0,0,0,0.2);
     }
     
     section[data-testid="stSidebar"] h2 {
-        color: #003366 !important;
-        border-left: 4px solid #D4AF37 !important;
+        color: var(--text-main) !important;
+        border-left: 4px solid var(--saffron) !important;
         padding-left: 1rem !important;
-        background: linear-gradient(90deg, rgba(212,175,55,0.1) 0%, transparent 100%);
+        background: linear-gradient(90deg, rgba(255,153,51,0.1) 0%, transparent 100%);
         padding: 0.5rem 1rem;
         margin: 0 -1rem 1rem -1rem;
-        position: relative;
     }
     
-    section[data-testid="stSidebar"] h2::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background: linear-gradient(90deg, #D4AF37 0%, transparent 100%);
-    }
-    
-    /* Metric cards with glassmorphism */
+    /* Metric cards: Clean and Professional */
     [data-testid="stMetric"] {
-        background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,249,250,0.95) 100%);
-        backdrop-filter: blur(10px);
-        padding: 1.5rem;
-        border-radius: 12px;
-        border-left: 5px solid #003366;
-        box-shadow: 
-            0 4px 15px rgba(0,0,0,0.1),
-            inset 0 1px 0 rgba(255,255,255,0.8);
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    [data-testid="stMetric"]::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 80px;
-        height: 80px;
-        background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%);
-        border-radius: 0 12px 0 100%;
-    }
-    
-    [data-testid="stMetric"]::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(90deg, #D4AF37 0%, transparent 100%);
-        opacity: 0;
-        transition: opacity 0.3s ease;
+        background: var(--bg-secondary);
+        padding: 1rem 1.25rem !important;
+        border-radius: 10px;
+        border: 1px solid var(--glass-border);
+        transition: all 0.2s ease;
+        margin-bottom: 0.5rem;
     }
     
     [data-testid="stMetric"]:hover {
-        transform: translateY(-5px);
-        box-shadow: 
-            0 8px 25px rgba(0,0,0,0.15),
-            inset 0 1px 0 rgba(255,255,255,0.8);
-        border-left-color: #D4AF37;
-    }
-    
-    [data-testid="stMetric"]:hover::after {
-        opacity: 1;
+        border-color: var(--primary);
+        background: rgba(78, 137, 232, 0.05);
     }
     
     [data-testid="stMetric"] label {
-        color: #003366 !important;
-        font-weight: 600 !important;
-        font-size: 0.95rem !important;
+        color: var(--text-muted) !important;
+        font-weight: 500 !important;
+        font-size: 0.75rem !important;
         text-transform: uppercase;
         letter-spacing: 0.5px;
+        white-space: normal !important;
+        line-height: 1.2 !important;
     }
     
     [data-testid="stMetric"] [data-testid="stMetricValue"] {
-        color: #D4AF37 !important;
+        color: var(--text-main) !important;
         font-weight: 700 !important;
-        font-size: 2rem !important;
-        text-shadow: 0 2px 4px rgba(212,175,55,0.2);
+        font-size: 1.6rem !important;
+        line-height: 1 !important;
     }
     
-    /* Insight boxes with unique design */
+    [data-testid="stMetric"] [data-testid="stMetricDelta"] {
+        font-weight: 500 !important;
+        font-size: 0.85rem !important;
+    }
+
+    /* Delta colors */
+    [data-testid="stMetricDelta"][data-direction="up"] { color: var(--success) !important; }
+    [data-testid="stMetricDelta"][data-direction="down"] { color: var(--danger) !important; }
+    
+    /* Insight boxes: Subtle */
     .insight-box {
-        background: linear-gradient(135deg, #e8f1f8 0%, #f8f9fa 100%);
-        padding: 1.5rem;
-        border-left: 6px solid #003366;
-        border-top: 1px solid rgba(212,175,55,0.3);
+        background: rgba(255, 255, 255, 0.02);
+        border-left: 4px solid var(--primary);
+        padding: 1.25rem;
         margin: 1rem 0;
-        border-radius: 8px;
-        box-shadow: 
-            0 3px 10px rgba(0,0,0,0.08),
-            inset 0 1px 0 rgba(255,255,255,0.5);
-        position: relative;
-        transition: all 0.3s ease;
+        border-radius: 6px;
+        border-top: 1px solid var(--glass-border);
+        border-right: 1px solid var(--glass-border);
+        border-bottom: 1px solid var(--glass-border);
     }
     
-    .insight-box::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 4px;
-        height: 100%;
-        background: linear-gradient(180deg, #D4AF37 0%, transparent 100%);
-    }
-    
-    .insight-box::after {
-        content: '💡';
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        font-size: 1.5rem;
-        opacity: 0.2;
-        transition: all 0.3s ease;
-    }
-    
-    .insight-box:hover {
-        box-shadow: 
-            0 6px 20px rgba(0,0,0,0.12),
-            inset 0 1px 0 rgba(255,255,255,0.5);
-        transform: translateX(5px);
-    }
-    
-    .insight-box:hover::after {
-        opacity: 0.4;
-        transform: rotate(10deg);
-    }
-    
-    /* Tabs with world-class styling */
+    /* Tabs styling: Clean */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
-        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
-        padding: 0.8rem;
-        border-radius: 12px;
-        box-shadow: 
-            inset 0 2px 4px rgba(0,0,0,0.05),
-            0 1px 0 rgba(255,255,255,0.8);
-        border: 1px solid rgba(0,51,102,0.1);
+        gap: 4px;
+        background: transparent;
+        padding: 0;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid var(--glass-border);
     }
     
     .stTabs [data-baseweb="tab"] {
         background-color: transparent;
-        border-radius: 8px;
-        color: #003366;
+        border-radius: 0;
+        color: var(--text-muted);
         font-weight: 500;
-        padding: 0.6rem 1.2rem;
-        transition: all 0.3s ease;
-        border: 2px solid transparent;
-        position: relative;
-    }
-    
-    .stTabs [data-baseweb="tab"]::before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 0;
-        height: 2px;
-        background: #D4AF37;
-        transition: width 0.3s ease;
-    }
-    
-    .stTabs [data-baseweb="tab"]:hover {
-        background: linear-gradient(135deg, rgba(0,51,102,0.05) 0%, rgba(212,175,55,0.05) 100%);
-        border-color: rgba(212,175,55,0.3);
-    }
-    
-    .stTabs [data-baseweb="tab"]:hover::before {
-        width: 80%;
+        padding: 0.5rem 1rem;
+        border-bottom: 2px solid transparent;
     }
     
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #003366 0%, #004080 100%) !important;
-        color: white !important;
-        box-shadow: 
-            0 4px 12px rgba(0,51,102,0.3),
-            inset 0 1px 0 rgba(255,255,255,0.2);
-        border-color: #D4AF37 !important;
+        background-color: transparent !important;
+        color: var(--primary) !important;
+        border-bottom: 2px solid var(--primary) !important;
     }
     
-    .stTabs [aria-selected="true"]::before {
-        width: 0 !important;
-    }
-    
-    /* Headers with decorative elements */
+    /* Headers: Professional */
     h1, h2, h3 {
-        color: #003366 !important;
+        color: var(--text-main) !important;
+        margin-top: 1.25rem !important;
+        margin-bottom: 1rem !important;
+        font-weight: 600 !important;
     }
     
     h1 {
-        font-weight: 700 !important;
-        border-bottom: 4px solid #D4AF37;
-        padding-bottom: 0.8rem;
-        margin-bottom: 1.5rem !important;
-        position: relative;
-        background: linear-gradient(90deg, rgba(0,51,102,0.03) 0%, transparent 100%);
-        padding: 1rem;
-        margin-left: -1rem;
-        padding-left: 1rem;
-        border-radius: 4px;
-    }
-    
-    h1::after {
-        content: '';
-        position: absolute;
-        bottom: -4px;
-        left: 1rem;
-        width: 120px;
-        height: 4px;
-        background: linear-gradient(90deg, #003366 0%, transparent 100%);
-    }
-    
-    h1::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 4px;
-        height: 100%;
-        background: linear-gradient(180deg, #D4AF37 0%, transparent 100%);
-        border-radius: 4px 0 0 4px;
+        font-size: 1.8rem !important;
     }
     
     h2 {
-        font-weight: 600 !important;
-        border-left: 5px solid #003366;
-        padding-left: 1.2rem;
-        background: linear-gradient(90deg, rgba(0,51,102,0.05) 0%, transparent 100%);
-        padding: 0.8rem 1.2rem;
-        border-radius: 4px;
-        margin: 1.5rem 0 1rem 0 !important;
-        position: relative;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-    
-    h2::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background: linear-gradient(90deg, #D4AF37 0%, transparent 100%);
+        font-size: 1.4rem !important;
     }
     
     h3 {
-        font-weight: 500 !important;
-        color: #004080 !important;
-        margin-top: 1rem !important;
-        padding-left: 0.5rem;
-        border-left: 3px solid rgba(212,175,55,0.5);
+        font-size: 1.2rem !important;
     }
-    
-    /* Buttons with premium styling */
-    .stButton > button {
-        background: linear-gradient(135deg, #003366 0%, #004080 100%);
-        color: white;
-        border: 2px solid #D4AF37;
-        border-radius: 8px;
-        padding: 0.6rem 2rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        box-shadow: 
-            0 4px 10px rgba(0,0,0,0.15),
-            inset 0 1px 0 rgba(255,255,255,0.2);
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .stButton > button::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.1);
-        transform: translate(-50%, -50%);
-        transition: width 0.6s, height 0.6s;
-    }
-    
-    .stButton > button:hover::before {
-        width: 300px;
-        height: 300px;
-    }
-    
-    .stButton > button:hover {
-        background: linear-gradient(135deg, #004080 0%, #005099 100%);
-        box-shadow: 
-            0 8px 20px rgba(0,0,0,0.25),
-            inset 0 1px 0 rgba(255,255,255,0.2);
-        transform: translateY(-2px);
-        border-color: #FFD700;
-    }
-    
-    /* Expander with enhanced design */
-    .streamlit-expanderHeader {
-        background: linear-gradient(90deg, #f8f9fa 0%, #ffffff 100%);
-        border-left: 4px solid #003366;
-        font-weight: 600;
-        color: #003366;
-        border-radius: 6px;
-        padding: 1rem !important;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-    
-    .streamlit-expanderHeader:hover {
-        background: linear-gradient(90deg, #e8f1f8 0%, #f8f9fa 100%);
-        border-left-color: #D4AF37;
-        box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-    }
-    
-    /* Info boxes */
-    .stAlert {
-        border-left: 5px solid #003366;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        backdrop-filter: blur(10px);
-    }
-    
-    /* Links */
-    a {
-        color: #003366 !important;
-        font-weight: 500;
-        transition: all 0.2s ease;
-        position: relative;
-    }
-    
-    a::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: #D4AF37;
-        transition: width 0.3s ease;
-    }
-    
-    a:hover {
-        color: #D4AF37 !important;
-    }
-    
-    a:hover::after {
-        width: 100%;
-    }
-    
-    /* DataFrames and Tables with premium styling */
-    .dataframe {
-        border: 2px solid #f0f2f6 !important;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-    }
-    
-    .dataframe thead tr th {
-        background: linear-gradient(135deg, #003366 0%, #004080 100%) !important;
-        color: white !important;
-        font-weight: 600 !important;
-        padding: 0.8rem !important;
-        border: none !important;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-size: 0.85rem !important;
-    }
-    
-    .dataframe tbody tr:nth-child(even) {
-        background-color: #f8f9fa !important;
-    }
-    
-    .dataframe tbody tr:hover {
-        background: linear-gradient(90deg, #e8f1f8 0%, #f8f9fa 100%) !important;
-        transform: scale(1.005);
-        transition: all 0.2s ease;
-    }
-    
-    .dataframe tbody tr td {
-        border-bottom: 1px solid rgba(0,51,102,0.05) !important;
-    }
-    
-    /* Select boxes and inputs */
-    .stSelectbox > div > div {
-        border-radius: 8px;
-        border: 2px solid #e0e0e0;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-    
-    .stSelectbox > div > div:hover {
-        border-color: #003366;
-        box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    }
-    
-    .stSelectbox > div > div:focus-within {
-        border-color: #D4AF37;
-        box-shadow: 0 0 0 3px rgba(212,175,55,0.1);
-    }
-    
-    /* Footer badge */
-    .gov-footer {
-        text-align: center;
-        padding: 1.5rem;
-        margin-top: 3rem;
-        color: #666;
+
+    .tab-description {
         font-size: 0.9rem;
-        border-top: 3px solid #D4AF37;
-        background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
-        position: relative;
+        color: var(--text-muted);
+        margin-bottom: 1rem;
     }
     
-    .gov-footer::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100px;
-        height: 3px;
-        background: linear-gradient(90deg, transparent 0%, #003366 50%, transparent 100%);
+    /* Buttons: Standard */
+    .stButton > button {
+        background: var(--primary);
+        border-radius: 4px;
+        font-weight: 500;
     }
     
-    /* Dividers with decorative design */
-    hr {
-        border: none;
-        height: 3px;
-        background: linear-gradient(90deg, transparent 0%, #D4AF37 50%, transparent 100%);
-        margin: 2rem 0;
-        position: relative;
+    /* Plotly container */
+    .element-container:has(.js-plotly-plot) {
+        margin: 1rem 0;
     }
-    
-    hr::after {
-        content: '◆';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: white;
-        color: #D4AF37;
-        padding: 0 0.5rem;
-        font-size: 0.8rem;
-    }
-    
-    /* Radio buttons */
-    .stRadio > div {
-        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-        padding: 0.8rem;
-        border-radius: 8px;
-        border: 1px solid #e0e0e0;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-    
-    /* Plotly charts container */
+
+    /* Plotly background */
     .js-plotly-plot {
-        border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        border: 1px solid rgba(0,51,102,0.1);
-        overflow: hidden;
-    }
-    
-    /* Slider styling */
-    .stSlider > div > div > div {
-        background: #003366 !important;
-    }
-    
-    /* Date input styling */
-    .stDateInput > div > div > input {
+        background-color: var(--bg-secondary);
         border-radius: 8px;
-        border: 2px solid #e0e0e0;
-        transition: all 0.3s ease;
+        border: 1px solid var(--glass-border);
     }
     
-    .stDateInput > div > div > input:hover {
-        border-color: #003366;
-    }
-    
-    /* Scrollbar styling */
-    ::-webkit-scrollbar {
-        width: 10px;
-        height: 10px;
-    }
-    
-    ::-webkit-scrollbar-track {
-        background: #f8f9fa;
-        border-radius: 5px;
-    }
-    
-    ::-webkit-scrollbar-thumb {
-        background: linear-gradient(180deg, #003366 0%, #004080 100%);
-        border-radius: 5px;
-        border: 2px solid #f8f9fa;
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(180deg, #004080 0%, #005099 100%);
-    }
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--bg-secondary); border-radius: 3px; }
     </style>
 """, unsafe_allow_html=True)
+
 
 
 # State name normalization mapping to fix duplicates and spelling errors
@@ -1176,6 +799,13 @@ def main():
     with tab1:
         if selected_state != 'All':
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
+        
+        st.markdown("""
+        <div class="tab-description">
+            High-level summary of biometric and demographic updates and enrolments across India.
+        </div>
+        """, unsafe_allow_html=True)
+        
         st.header("Dashboard Overview")
         
         # Key metrics
@@ -1184,11 +814,11 @@ def main():
         if 'daily' in data and len(data['daily']) > 0:
             with col1:
                 total_bio = data['daily']['bio_total'].sum()
-                st.metric("Total Biometric Updates", f"{total_bio:,.0f}")
+                st.metric("Biometric Updates", f"{total_bio:,.0f}")
             
             with col2:
                 total_demo = data['daily']['demo_total'].sum()
-                st.metric("Total Demographic Updates", f"{total_demo:,.0f}")
+                st.metric("Demographic Updates", f"{total_demo:,.0f}")
             
             with col3:
                 total_enrol = data['daily']['enrol_total'].sum()
@@ -1196,7 +826,7 @@ def main():
             
             with col4:
                 avg_daily = data['daily']['bio_total'].mean()
-                st.metric("Avg Daily Biometric Updates", f"{avg_daily:,.0f}")
+                st.metric("Avg Daily Updates", f"{avg_daily:,.0f}")
         
         st.markdown("---")
         
@@ -1214,10 +844,10 @@ def main():
                 fig = px.pie(
                     values=list(comparison_data.values()),
                     names=list(comparison_data.keys()),
-                    title="Total Updates by Type",
                     color_discrete_sequence=px.colors.qualitative.Set3
                 )
                 fig.update_traces(textposition='inside', textinfo='percent+label')
+                fig.update_layout(height=400, margin=dict(l=20, r=20, t=20, b=20))
                 st.plotly_chart(fig, use_container_width=True)
         
         with col2:
@@ -1230,12 +860,11 @@ def main():
                         x='bio_total',
                         y='state',
                         orientation='h',
-                        title="Top States",
                         labels={'bio_total': 'Biometric Updates', 'state': 'State'},
                         color='bio_total',
                         color_continuous_scale='Blues'
                     )
-                    fig.update_layout(yaxis={'categoryorder': 'total ascending'})
+                    fig.update_layout(yaxis={'categoryorder': 'total ascending'}, height=400, margin=dict(l=20, r=20, t=20, b=20))
                     st.plotly_chart(fig, use_container_width=True)
             else:
                 st.subheader(f"Top Districts in {selected_state}")
@@ -1300,6 +929,8 @@ def main():
     
     # Tab 2: Temporal Analysis
     with tab2:
+        st.markdown('<div class="tab-description">Analysis of daily, weekly, and monthly trends in update volumes.</div>', unsafe_allow_html=True)
+        
         st.header("Temporal Pattern Analysis")
         if selected_state != 'All':
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
@@ -1308,11 +939,10 @@ def main():
             # Time series chart
             st.subheader("Time Series Trends")
             
-            chart_type = st.radio("Select Chart Type", ["Line Chart", "Area Chart"], horizontal=True)
-            
-            fig = go.Figure()
+            chart_type = st.radio("Select Chart Type", ["Line Chart", "Pattern Heatmap"], horizontal=True)
             
             if chart_type == "Line Chart":
+                fig = go.Figure()
                 fig.add_trace(go.Scatter(
                     x=data['daily']['date'],
                     y=data['daily']['bio_total'],
@@ -1334,40 +964,65 @@ def main():
                     name='Enrolments',
                     line=dict(color='#2ca02c', width=2)
                 ))
+                
+                fig.update_layout(
+                    xaxis_title="Date",
+                    yaxis_title="Count",
+                    hovermode='x unified',
+                    height=500,
+                    margin=dict(l=20, r=20, t=20, b=20)
+                )
+                st.plotly_chart(fig, use_container_width=True)
             else:
-                fig.add_trace(go.Scatter(
-                    x=data['daily']['date'],
-                    y=data['daily']['bio_total'],
-                    mode='lines',
-                    name='Biometric Updates',
-                    fill='tonexty',
-                    line=dict(color='#1f77b4')
-                ))
-                fig.add_trace(go.Scatter(
-                    x=data['daily']['date'],
-                    y=data['daily']['demo_total'],
-                    mode='lines',
-                    name='Demographic Updates',
-                    fill='tonexty',
-                    line=dict(color='#ff7f0e')
-                ))
-                fig.add_trace(go.Scatter(
-                    x=data['daily']['date'],
-                    y=data['daily']['enrol_total'],
-                    mode='lines',
-                    name='Enrolments',
-                    fill='tonexty',
-                    line=dict(color='#2ca02c')
-                ))
-            
-            fig.update_layout(
-                title="Daily Updates Over Time",
-                xaxis_title="Date",
-                yaxis_title="Count",
-                hovermode='x unified',
-                height=500
-            )
-            st.plotly_chart(fig, use_container_width=True)
+                # Heatmap Pattern
+                heatmap_metric = st.selectbox(
+                    "Select Metric for Heatmap",
+                    ["Biometric Updates", "Demographic Updates", "Enrolments"],
+                    key="temp_heatmap_metric"
+                )
+                
+                metric_map = {
+                    "Biometric Updates": "bio_total",
+                    "Demographic Updates": "demo_total",
+                    "Enrolments": "enrol_total"
+                }
+                
+                target_col = metric_map[heatmap_metric]
+                
+                # Pivot data for heatmap: Day of Month vs Weekday
+                df_heatmap = data['daily'].copy()
+                df_heatmap['day_of_month'] = df_heatmap['date'].dt.day
+                
+                weekday_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+                
+                # Pivot: Weekday (X) vs Day of Month (Y)
+                pivot_df = df_heatmap.groupby(['day_of_month', 'weekday'])[target_col].mean().unstack()
+                
+                # Use all 31 days possible
+                pivot_df = pivot_df.reindex(index=range(1, 32))
+                # Ensure correct weekday order
+                pivot_df = pivot_df.reindex(columns=[wd for wd in weekday_order if wd in pivot_df.columns])
+                
+                fig = px.imshow(
+                    pivot_df,
+                    labels=dict(x="Day of Week", y="Day of Month", color="Avg Count"),
+                    x=pivot_df.columns,
+                    y=pivot_df.index,
+                    color_continuous_scale='Viridis',
+                    aspect="auto"
+                )
+                fig.update_layout(
+                    title=f"Update Density: {heatmap_metric} Patterns",
+                    height=600,
+                    margin=dict(l=20, r=20, t=50, b=20),
+                    xaxis_title="Day of Week",
+                    yaxis_title="Day of Month",
+                    coloraxis_colorbar=dict(title="Avg Count")
+                )
+                # Improve Y-axis to show every day
+                fig.update_yaxes(tickmode='linear', tick0=1, dtick=1)
+                st.plotly_chart(fig, use_container_width=True)
+                st.caption("ℹ️ This heatmap reveals patterns across the month. For example, you can see if month-start (1-5) or month-end (25-31) consistently shows higher load across different days of the week.")
             
             # Weekly patterns
             col1, col2 = st.columns(2)
@@ -1434,8 +1089,13 @@ def main():
             # Pattern Learning Visualizations (Feature 1)
             if 'daily_patterns' in data or 'state_patterns' in data:
                 st.markdown("---")
-                st.subheader("📊 Pattern Learning (STL Decomposition)")
-                st.markdown("**Algorithm**: STL Decomposition | **Capability**: Pattern Learning")
+                st.subheader("📊 Pattern Insights")
+                
+                with st.expander("ℹ️ About Pattern Learning"):
+                    st.markdown("""
+                    This system uses automated decomposition to separate regular trends from seasonal cycles. 
+                    It helps identify whether a particular metric is consistently increasing or just showing normal periodic fluctuation.
+                    """)
                 
                 # Daily Patterns Section
                 if 'daily_patterns' in data:
@@ -1583,10 +1243,10 @@ def main():
     
     # Tab 3: Forecasting & Predictions
     with tab3:
+        st.markdown('<div class="tab-description">30 to 90-day projections for Aadhaar update workloads.</div>', unsafe_allow_html=True)
         st.header("Forecasting & Predictions")
         if selected_state != 'All':
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
-        st.markdown("**Algorithm**: auto_ARIMA (pmdarima) | **Capability**: Forecasting")
         
         # Forecasting Visualizations (Feature 2)
         if 'daily_forecasts' in data or 'state_forecasts' in data:
@@ -1795,7 +1455,6 @@ def main():
                             showlegend=False
                         ))
                         fig_state.update_layout(
-                            title=f"{selected_state_forecast} Forecast",
                             xaxis_title="Period (Days Ahead)",
                             yaxis_title="Forecasted Value",
                             height=300
@@ -1815,6 +1474,7 @@ def main():
     
     # Tab 4: Geographic Analysis
     with tab4:
+        st.markdown('<div class="tab-description">Spatial distribution of Aadhaar activity and state-wise comparisons.</div>', unsafe_allow_html=True)
         st.header("Geographic Distribution Analysis")
         if selected_state != 'All':
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
@@ -1896,6 +1556,7 @@ def main():
     
     # Tab 5: Age Group Analysis
     with tab5:
+        st.markdown('<div class="tab-description">Analysis of updates across different demographic age groups.</div>', unsafe_allow_html=True)
         st.header("Age Group Analysis")
         if selected_state != 'All':
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
@@ -1918,10 +1579,10 @@ def main():
                         fig = px.pie(
                             values=list(bio_age_totals.values()),
                             names=list(bio_age_totals.keys()),
-                            title="Biometric Age Distribution",
                             color_discrete_sequence=px.colors.qualitative.Set2
                         )
                         fig.update_traces(textposition='inside', textinfo='percent+label')
+                        fig.update_layout(height=350, margin=dict(l=10, r=10, t=10, b=10))
                         st.plotly_chart(fig, use_container_width=True)
                         
                         # Show totals
@@ -1942,10 +1603,10 @@ def main():
                         fig = px.pie(
                             values=list(demo_age_totals.values()),
                             names=list(demo_age_totals.keys()),
-                            title="Demographic Age Distribution",
                             color_discrete_sequence=px.colors.qualitative.Set1
                         )
                         fig.update_traces(textposition='inside', textinfo='percent+label')
+                        fig.update_layout(height=350, margin=dict(l=10, r=10, t=10, b=10))
                         st.plotly_chart(fig, use_container_width=True)
                         
                         # Show totals
@@ -1967,10 +1628,10 @@ def main():
                         fig = px.pie(
                             values=list(enrol_age_totals.values()),
                             names=list(enrol_age_totals.keys()),
-                            title="Enrolment Age Distribution",
                             color_discrete_sequence=px.colors.qualitative.Pastel
                         )
                         fig.update_traces(textposition='inside', textinfo='percent+label')
+                        fig.update_layout(height=350, margin=dict(l=10, r=10, t=10, b=10))
                         st.plotly_chart(fig, use_container_width=True)
                         
                         # Show totals
@@ -2130,6 +1791,7 @@ def main():
     
     # Tab 6: Coverage & Anomalies
     with tab6:
+        st.markdown('<div class="tab-description">Detection of service coverage gaps and unusual update spikes.</div>', unsafe_allow_html=True)
         st.header("Coverage & Anomaly Analysis")
         if selected_state != 'All':
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
@@ -2146,19 +1808,19 @@ def main():
             
             with col1:
                 avg_coverage = coverage_df['coverage_index'].mean()
-                st.metric("Average Coverage Index", f"{avg_coverage:.2f}")
+                st.metric("Avg Coverage", f"{avg_coverage:.2f}")
             
             with col2:
                 low_coverage = (coverage_df['coverage_index'] < 0.5).sum()
-                st.metric("Districts with Low Coverage (<0.5)", f"{low_coverage}")
+                st.metric("Low Coverage", f"{low_coverage}")
             
             with col3:
                 good_coverage = (coverage_df['coverage_index'] >= 1.0).sum()
-                st.metric("Districts with Good Coverage (≥1.0)", f"{good_coverage}")
+                st.metric("Good Coverage", f"{good_coverage}")
             
             with col4:
                 total_districts = len(coverage_df)
-                st.metric("Total Districts Analyzed", f"{total_districts}")
+                st.metric("Districts", f"{total_districts}")
             
             st.markdown("---")
             
@@ -2171,12 +1833,12 @@ def main():
                     coverage_df,
                     x='coverage_index',
                     nbins=50,
-                    title="Distribution of Coverage Index",
                     labels={'coverage_index': 'Coverage Index', 'count': 'Number of Districts'},
                     color_discrete_sequence=['#1f77b4']
                 )
-                fig.add_vline(x=1.0, line_dash="dash", line_color="green", annotation_text="Ideal Coverage (1.0)")
-                fig.add_vline(x=0.5, line_dash="dash", line_color="red", annotation_text="Low Coverage (0.5)")
+                fig.add_vline(x=1.0, line_dash="dash", line_color="green", annotation_text="Ideal (1.0)")
+                fig.add_vline(x=0.5, line_dash="dash", line_color="red", annotation_text="Low (0.5)")
+                fig.update_layout(height=450, margin=dict(l=20, r=20, t=20, b=20))
                 st.plotly_chart(fig, use_container_width=True)
             
             with col2:
@@ -2224,11 +1886,10 @@ def main():
                 orientation='h',
                 color='avg_coverage_index',
                 color_continuous_scale='RdYlGn',
-                title=f"Average Coverage Index by State (Top {top_n_coverage})",
-                labels={'avg_coverage_index': 'Average Coverage Index', 'state': 'State'},
+                labels={'avg_coverage_index': 'Avg Coverage', 'state': 'State'},
                 hover_data=['district_count', 'demo_total', 'bio_total']
             )
-            fig.update_layout(yaxis={'categoryorder': 'total ascending'}, height=500)
+            fig.update_layout(yaxis={'categoryorder': 'total ascending'}, height=500, margin=dict(l=20, r=20, t=20, b=20))
             st.plotly_chart(fig, use_container_width=True)
             
             # Coverage table
@@ -2270,7 +1931,7 @@ def main():
             
             with col1:
                 total_anomalies = len(anomalies_df)
-                st.metric("Total Anomalies Detected", f"{total_anomalies}")
+                st.metric("Anomalies", f"{total_anomalies}")
             
             with col2:
                 high_severity = (anomalies_df['severity'] >= 0.8).sum() if 'severity' in anomalies_df.columns else 0
@@ -2280,7 +1941,7 @@ def main():
                 if 'date' in anomalies_df.columns:
                     anomalies_df['date'] = pd.to_datetime(anomalies_df['date'], errors='ignore')
                     recent_anomalies = anomalies_df[anomalies_df['date'] >= anomalies_df['date'].max() - pd.Timedelta(days=30)] if len(anomalies_df) > 0 else anomalies_df
-                    st.metric("Anomalies (Last 30 Days)", f"{len(recent_anomalies)}")
+                    st.metric("Last 30 Days", f"{len(recent_anomalies)}")
             
             # Temporal anomalies visualization
             if 'date' in anomalies_df.columns and len(anomalies_df) > 0:
@@ -2349,6 +2010,7 @@ def main():
     
     # Tab 7: Insights & Recommendations
     with tab7:
+        st.markdown('<div class="tab-description">Actionable findings and prioritized recommendations.</div>', unsafe_allow_html=True)
         st.header("Insights & Recommendations")
         if selected_state != 'All':
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
@@ -2469,10 +2131,10 @@ def main():
     
     # Tab 8: Surge Predictions
     with tab8:
+        st.markdown('<div class="tab-description">Early warnings for upcoming surges based on age transitions and regional patterns.</div>', unsafe_allow_html=True)
         st.header("🚨 Surge Prediction System")
         if selected_state != 'All':
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
-        st.markdown("**Algorithm**: Ensemble (Age Transitions + Forecasts + Regional Patterns) | **Capability**: Surge Prediction")
         
         if 'surge_predictions' in data:
             predictions_df = data['surge_predictions'].copy()
@@ -2708,10 +2370,10 @@ def main():
     
     # Tab 9: Feature Engineering
     with tab9:
-        st.header("⚙️ Feature Engineering")
+        st.markdown('<div class="tab-description">Engineered data variables used by the AI models.</div>', unsafe_allow_html=True)
+        st.header("⚙️ Data Variable Insights")
         if selected_state != 'All':
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
-        st.markdown("**Purpose**: Prepare data for ML models with engineered features")
         
         if 'features_daily' in data or 'features_state' in data:
             # Feature summary
@@ -2865,11 +2527,10 @@ def main():
                                 features_daily_df,
                                 x=selected_feature,
                                 nbins=30,
-                                title="Feature Distribution",
                                 labels={'count': 'Frequency'},
                                 color_discrete_sequence=['#1f77b4']
                             )
-                            fig.update_layout(height=300)
+                            fig.update_layout(height=300, margin=dict(l=10, r=10, t=10, b=10))
                             st.plotly_chart(fig, use_container_width=True)
             
             st.markdown("---")
@@ -2896,12 +2557,11 @@ def main():
                             x=selected_feature_state,
                             y='state',
                             orientation='h',
-                            title=f"Top {top_n_features} States by {selected_feature_state}",
                             labels={selected_feature_state: 'Feature Value', 'state': 'State'},
                             color=selected_feature_state,
                             color_continuous_scale='Viridis'
                         )
-                        fig.update_layout(yaxis={'categoryorder': 'total ascending'}, height=500)
+                        fig.update_layout(yaxis={'categoryorder': 'total ascending'}, height=500, margin=dict(l=20, r=20, t=20, b=20))
                         st.plotly_chart(fig, use_container_width=True)
             
             st.markdown("---")
@@ -2925,10 +2585,10 @@ def main():
     
     # Tab 10: District & Pincode Models
     with tab10:
-        st.header("🏘️ District & Pincode Level Models")
+        st.markdown('<div class="tab-description">Granular forecasting and anomaly detection at district and pincode levels.</div>', unsafe_allow_html=True)
+        st.header("🏘️ District & Pincode Analysis")
         if selected_state != 'All':
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
-        st.markdown("**Purpose**: Granular forecasting and anomaly detection at district and pincode levels")
         
         # Summary metrics
         if 'district_pincode_summary' in data:
@@ -2939,9 +2599,9 @@ def main():
             with col1:
                 if 'district_forecasts' in summary.get('summary', {}):
                     total_forecasts = summary['summary']['district_forecasts'].get('total_forecasts', 0)
-                    st.metric("District Forecasts", f"{total_forecasts}")
+                    st.metric("Dist. Forecasts", f"{total_forecasts}")
                 else:
-                    st.metric("District Forecasts", "0")
+                    st.metric("Dist. Forecasts", "0")
             
             with col2:
                 if 'pincode_anomalies' in summary.get('summary', {}):
@@ -3028,12 +2688,11 @@ def main():
                             y='district',
                             orientation='h',
                             color='volume_classification' if 'volume_classification' in top_districts.columns else None,
-                            title=f"Top {top_n_districts} Districts by Forecast Mean",
                             labels={'forecast_mean': 'Forecast Mean', 'district': 'District'},
                             hover_data=['state', 'historical_mean', 'forecast_trend'],
                             color_discrete_map={'high_volume': '#1f77b4', 'low_volume': '#ff7f0e'} if 'volume_classification' in top_districts.columns else None
                         )
-                        fig.update_layout(yaxis={'categoryorder': 'total ascending'}, height=500)
+                        fig.update_layout(yaxis={'categoryorder': 'total ascending'}, height=500, margin=dict(l=20, r=20, t=20, b=20))
                         st.plotly_chart(fig, use_container_width=True)
                 
                 # State aggregations
@@ -3047,11 +2706,10 @@ def main():
                         x='state',
                         y='total_forecast_mean',
                         color='forecast_increase',
-                        title="Total Forecast by State",
                         labels={'total_forecast_mean': 'Total Forecast Mean', 'state': 'State', 'forecast_increase': 'Forecast Increase (%)'},
                         color_continuous_scale='RdYlGn'
                     )
-                    fig.update_layout(xaxis_tickangle=-45, height=400)
+                    fig.update_layout(xaxis_tickangle=-45, height=400, margin=dict(l=20, r=20, t=20, b=20))
                     st.plotly_chart(fig, use_container_width=True)
                 
                 # District forecasts table
@@ -3181,11 +2839,10 @@ def main():
     
     # Tab 11: Actionable Insights
     with tab11:
-        st.header("🎯 Actionable Insights")
+        st.markdown('<div class="tab-description">Synthesis of AI findings into task-oriented recommendations.</div>', unsafe_allow_html=True)
+        st.header("🎯 Final Action Plans")
         if selected_state != 'All':
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
-        st.markdown("**Purpose**: Translating predictions, anomalies, and forecasts into actionable recommendations")
-        st.markdown("**Feature**: Actionable Insights Generation (Feature 9)")
         
         if 'actionable_insights' in data:
             insights_df = data['actionable_insights'].copy()
