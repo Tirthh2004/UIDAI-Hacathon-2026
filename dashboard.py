@@ -2289,8 +2289,9 @@ def main():
                     <h4 style="color: {border_color}; margin-top: 0;">
                         {category} - {priority} Priority
                     </h4>
-                    <p style="margin-bottom: 0.5rem;"><strong>Finding:</strong> {finding}</p>
-                    <p style="margin-bottom: 0;"><strong>Recommendation:</strong> {recommendation}</p>
+                    <p style="margin-bottom: 0.5rem; color: black;"><strong>Finding:</strong> {finding}</p>
+                    <p style="margin-bottom: 0; color: black;"><strong>Recommendation:</strong> {recommendation}</p>
+
                 </div>
                 """, unsafe_allow_html=True)
             
@@ -3172,7 +3173,8 @@ def main():
                     st.plotly_chart(fig, use_container_width=True)
             
             st.markdown("---")
-            
+
+  #change title color in bottom tabs          
             # Display insights
             st.subheader("Actionable Insights & Recommendations")
             
