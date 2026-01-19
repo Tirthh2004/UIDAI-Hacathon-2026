@@ -47,6 +47,8 @@ INDIA_STATE_COORDINATES = {
 STATE_NAME_MAPPING = {
     'Jammu and Kashmir': 'Jammu And Kashmir',
     'Jammu And Kashmir': 'Jammu And Kashmir',
+    'Jammu & Kashmir': 'Jammu And Kashmir',
+    'J&K': 'Jammu And Kashmir',
     'Andaman and Nicobar Islands': 'Andaman And Nicobar Islands',
     'Andaman And Nicobar Islands': 'Andaman And Nicobar Islands',
     'Dadra and Nagar Haveli': 'Dadra And Nagar Haveli And Daman And Diu',

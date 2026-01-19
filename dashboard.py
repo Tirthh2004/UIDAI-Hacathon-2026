@@ -829,6 +829,30 @@ def main():
                 st.metric("Avg Daily Updates", f"{avg_daily:,.0f}")
         
         st.markdown("---")
+
+        # ---------------------------------------------------------
+        # NEW: Impact & Utility Section (User Request)
+        # ---------------------------------------------------------
+        with st.expander("🚀 Project Impact & Strategic Utility", expanded=True):
+            imp_col1, imp_col2 = st.columns(2)
+            
+            with imp_col1:
+                st.markdown("""
+                ### 🌟 Social & Administrative Benefit
+                *   **Targeted Service Delivery:** Identify high-demand areas for **Biometric Updates** to deploy mobile Aadhaar camps, reducing citizen wait times.
+                *   **Resource Optimization:** Use **Demographic Update** trends to allocate staff efficiently during peak operational periods.
+                *   **Policy Planning:** **Age Group Analysis** assists in linking Aadhaar with school admissions (5-17 yrs) or voter ID updates (18+ yrs).
+                """)
+                
+            with imp_col2:
+                st.markdown("""
+                ### 🛠️ Practicality & Feasibility
+                *   **Proactive Management:** **Forecasting** modules allow administrators to prepare for demand surges 7-30 days in advance.
+                *   **Anomaly Detection:** Automatically flags irregular drops in enrolment, enabling quick technical interventions in specific districts.
+                *   **Actionable Granularity:** Drill-down capabilities from **State to District** level make insights directly usable for local administration.
+                """)
+        
+        st.markdown("---")
         
         # Quick summary charts
         col1, col2 = st.columns(2)
@@ -936,6 +960,42 @@ def main():
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
         
         if 'daily' in data and len(data['daily']) > 0:
+            # Overview Section: Daily, Weekly, Monthly Averages
+            st.subheader("Volume Overview (Averages)")
+            
+            # Create a temporary dataframe with date index for resampling
+            df_temp = data['daily'].set_index('date').copy()
+            
+            # Calculate averages for each metric
+            metrics = {
+                'Biometric': 'bio_total',
+                'Demographic': 'demo_total',
+                'Enrolment': 'enrol_total'
+            }
+            
+            # Display in columns by Timeframe
+            col_d, col_w, col_m = st.columns(3)
+            
+            with col_d:
+                st.markdown("#### 📅 Daily Average")
+                for label, col in metrics.items():
+                    val = df_temp[col].mean()
+                    st.metric(f"{label}", f"{val:,.0f}")
+            
+            with col_w:
+                st.markdown("#### 🗓️ Weekly Average")
+                for label, col in metrics.items():
+                    val = df_temp[col].resample('W').sum().mean()
+                    st.metric(f"{label}", f"{val:,.0f}")
+                    
+            with col_m:
+                st.markdown("#### 📆 Monthly Average")
+                for label, col in metrics.items():
+                    val = df_temp[col].resample('ME').sum().mean()
+                    st.metric(f"{label}", f"{val:,.0f}")
+            
+            st.markdown("---")
+
             # Time series chart
             st.subheader("Time Series Trends")
             
@@ -974,7 +1034,7 @@ def main():
                 )
                 st.plotly_chart(fig, use_container_width=True)
             else:
-                # Heatmap Pattern
+                # Heatmap Pattern: Month vs Day of Month (Calendar View)
                 heatmap_metric = st.selectbox(
                     "Select Metric for Heatmap",
                     ["Biometric Updates", "Demographic Updates", "Enrolments"],
@@ -989,40 +1049,47 @@ def main():
                 
                 target_col = metric_map[heatmap_metric]
                 
-                # Pivot data for heatmap: Day of Month vs Weekday
+                # Pivot data for heatmap: Month vs Day of Month
                 df_heatmap = data['daily'].copy()
+                df_heatmap['month'] = df_heatmap['date'].dt.month
                 df_heatmap['day_of_month'] = df_heatmap['date'].dt.day
                 
-                weekday_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+                # Aggregate to handle multiple years if present (taking average)
+                pivot_df = df_heatmap.groupby(['month', 'day_of_month'])[target_col].mean().unstack()
                 
-                # Pivot: Weekday (X) vs Day of Month (Y)
-                pivot_df = df_heatmap.groupby(['day_of_month', 'weekday'])[target_col].mean().unstack()
+                # Ensure all 12 months and 31 days exist
+                pivot_df = pivot_df.reindex(index=range(1, 13), columns=range(1, 32))
                 
-                # Use all 31 days possible
-                pivot_df = pivot_df.reindex(index=range(1, 32))
-                # Ensure correct weekday order
-                pivot_df = pivot_df.reindex(columns=[wd for wd in weekday_order if wd in pivot_df.columns])
+                # Map Month Numbers to Names for Y-axis
+                month_names = {
+                    1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May', 6: 'June',
+                    7: 'July', 8: 'August', 9: 'September', 10: 'October', 11: 'November', 12: 'December'
+                }
+                pivot_df.index = pivot_df.index.map(month_names)
                 
                 fig = px.imshow(
                     pivot_df,
-                    labels=dict(x="Day of Week", y="Day of Month", color="Avg Count"),
+                    labels=dict(x="Day of Month", y="Month", color="Avg Volume"),
                     x=pivot_df.columns,
                     y=pivot_df.index,
-                    color_continuous_scale='Viridis',
+                    color_continuous_scale='Viridis', # High volume = Lighter/Brighter
                     aspect="auto"
                 )
+                
                 fig.update_layout(
-                    title=f"Update Density: {heatmap_metric} Patterns",
+                    title=f"Calendar Seasonality: {heatmap_metric}",
                     height=600,
                     margin=dict(l=20, r=20, t=50, b=20),
-                    xaxis_title="Day of Week",
-                    yaxis_title="Day of Month",
-                    coloraxis_colorbar=dict(title="Avg Count")
+                    xaxis_title="Day of Month (1-31)",
+                    yaxis_title="Month",
+                    coloraxis_colorbar=dict(title="Avg Volume")
                 )
-                # Improve Y-axis to show every day
-                fig.update_yaxes(tickmode='linear', tick0=1, dtick=1)
+                
+                # Show every day on X axis
+                fig.update_xaxes(tickmode='linear', tick0=1, dtick=1)
+                
                 st.plotly_chart(fig, use_container_width=True)
-                st.caption("ℹ️ This heatmap reveals patterns across the month. For example, you can see if month-start (1-5) or month-end (25-31) consistently shows higher load across different days of the week.")
+                st.caption(f"ℹ️ **How to read:** This 'Calendar Heatmap' shows the average daily volume for each day of every month. Darker colors indicate lower activity, while brighter/yellow colors indicate high activity. Look for horizontal bands (busy months) or vertical stripes (busy days, e.g., end-of-month surges).")
             
             # Weekly patterns
             col1, col2 = st.columns(2)
@@ -1328,22 +1395,60 @@ def main():
                     st.plotly_chart(fig, use_container_width=True)
                     
                 with col2:
-                    st.markdown("##### Forecast Performance Metrics")
+                    st.markdown("##### Forecast Insights")
                     if metric_summary is not None:
-                        col_met1, col_met2 = st.columns(2)
-                        with col_met1:
-                            st.metric("MAE", f"{metric_summary['mae']:,.2f}")
-                            st.metric("RMSE", f"{metric_summary['rmse']:,.2f}")
-                        with col_met2:
-                            st.metric("MAPE", f"{metric_summary['mape']:.2f}%")
-                            st.metric("Model Order", str(metric_summary['model_order']))
+                        # User-friendly metrics
+                        mape = metric_summary['mape']
+                        if mape < 5:
+                            reliability = "High"
+                            reliability_color = "#48BB78" # Green
+                            reliability_msg = "Excellent forecast accuracy."
+                        elif mape < 15:
+                            reliability = "Medium"
+                            reliability_color = "#FF9933" # Orange
+                            reliability_msg = "Moderate forecast accuracy."
+                        else:
+                            reliability = "Low"
+                            reliability_color = "#F56565" # Red
+                            reliability_msg = "Low forecast accuracy; use with caution."
                         
-                    st.markdown("##### Forecast Summary")
+                        # Determine trend
+                        try:
+                            start_val = metric_forecasts['forecast_value'].iloc[0]
+                            end_val = metric_forecasts['forecast_value'].iloc[-1]
+                            pct_change = ((end_val - start_val) / start_val) * 100
+                            
+                            if pct_change > 2:
+                                trend = "Increasing 📈"
+                            elif pct_change < -2:
+                                trend = "Decreasing 📉"
+                            else:
+                                trend = "Stable ➡️"
+                        except:
+                            trend = "Stable ➡️"
+
+                        st.markdown(f"""
+                        <div style="background-color: rgba(255,255,255,0.05); padding: 15px; border-radius: 5px; border-left: 5px solid {reliability_color}; margin-bottom: 15px;">
+                            <h3 style="margin:0; font-size: 1.1rem; color: #FAFAFA;">Forecast Reliability: <span style="color:{reliability_color}">{reliability}</span></h3>
+                            <p style="margin:5px 0 0 0; color: #A0AEC0; font-size: 0.9rem;">{reliability_msg}</p>
+                        </div>
+                        """, unsafe_allow_html=True)
+                        
+                        # Total Projected Volume
+                        total_projected = metric_forecasts['forecast_value'].sum()
+                        st.metric("Total Projected Volume", f"{total_projected:,.0f}", help=f"Total projected {selected_metric.replace('_', ' ')} for the next {int(metric_summary['forecast_periods'])} days")
+                        
+                        col_trend1, col_trend2 = st.columns(2)
+                        with col_trend1:
+                            st.metric("Expected Trend", trend)
+                        with col_trend2:
+                            st.metric("Forecast Horizon", f"{int(metric_summary['forecast_periods'])} days")
+                        
+                    st.markdown("##### Model Information")
                     if metric_summary is not None:
                         st.info(f"""
-                        **Forecast Periods**: {int(metric_summary['forecast_periods'])} days  
-                        **AIC**: {metric_summary['aic']:.2f}  
-                        **Model**: ARIMA{metric_summary['model_order']}
+                        This forecast is generated using advanced time-series analysis optimized for {selected_metric.replace('_', ' ')}.
+                        The model automatically adjusts for seasonal patterns and historical trends.
                         """)
                     
                 # Forecast comparison table
@@ -1410,21 +1515,35 @@ def main():
                     if not filtered_df.empty:
                         state_forecast_data = filtered_df.iloc[0]
 
-                        st.metric("Forecast Periods", f"{int(state_forecast_data['forecast_periods'])} days")
-                        st.metric("MAE", f"{state_forecast_data['mae']:,.2f}")
-                        st.metric("RMSE", f"{state_forecast_data['rmse']:,.2f}")
-                        st.metric("MAPE", f"{state_forecast_data['mape']:.2f}%")
-                        st.info(f"**Model**: ARIMA{state_forecast_data['model_order']}")
+                        # User-friendly metrics
+                        mape = state_forecast_data['mape']
+                        if mape < 5:
+                            reliability = "High"
+                            reliability_color = "#48BB78"
+                        elif mape < 15:
+                            reliability = "Medium"
+                            reliability_color = "#FF9933"
+                        else:
+                            reliability = "Low"
+                            reliability_color = "#F56565"
+                        
+                        st.markdown(f"""
+                        <div style="background-color: rgba(255,255,255,0.05); padding: 15px; border-radius: 5px; border-left: 5px solid {reliability_color}; margin-bottom: 15px;">
+                            <h3 style="margin:0; font-size: 1.1rem; color: #FAFAFA;">Forecast Reliability: <span style="color:{reliability_color}">{reliability}</span></h3>
+                        </div>
+                        """, unsafe_allow_html=True)
+                        
+                        # Total Projected Volume for State
+                        state_fc_subset = state_forecasts_df[state_forecasts_df['state'] == selected_state_forecast]
+                        if not state_fc_subset.empty:
+                            total_projected = state_fc_subset['forecast_value'].sum()
+                            st.metric("Total Projected Volume", f"{total_projected:,.0f}")
+
+                        st.metric("Forecast Horizon", f"{int(state_forecast_data['forecast_periods'])} days")
                     else:
                         st.warning("No forecast summary available for this state.")
                         st.stop()
     
-                    # st.metric("Forecast Periods", f"{int(state_forecast_data['forecast_periods'])} days")
-                    # st.metric("MAE", f"{state_forecast_data['mae']:,.2f}")
-                    # st.metric("RMSE", f"{state_forecast_data['rmse']:,.2f}")
-                    # st.metric("MAPE", f"{state_forecast_data['mape']:.2f}%")
-                    # st.info(f"**Model**: ARIMA{state_forecast_data['model_order']}")
-                        
                     # Forecast chart for selected state
                     state_fc = state_forecasts_df[state_forecasts_df['state'] == selected_state_forecast]
                     if len(state_fc) > 0:
@@ -1463,12 +1582,10 @@ def main():
                     
                 # State forecasts table
                 with st.expander("📋 View All State Forecasts Summary"):
-                    display_cols = ['state', 'forecast_type', 'forecast_periods', 'mae', 'rmse', 'mape', 'model_order']
-                    display_df = state_summary_df[display_cols].copy().sort_values('mae', ascending=True)
-                    display_df.columns = ['State', 'Forecast Type', 'Forecast Periods', 'MAE', 'RMSE', 'MAPE', 'Model Order']
-                    display_df['MAE'] = display_df['MAE'].apply(lambda x: f"{x:,.2f}")
-                    display_df['RMSE'] = display_df['RMSE'].apply(lambda x: f"{x:,.2f}")
-                    display_df['MAPE'] = display_df['MAPE'].apply(lambda x: f"{x:.2f}%")
+                    display_cols = ['state', 'forecast_type', 'forecast_periods', 'mape']
+                    display_df = state_summary_df[display_cols].copy().sort_values('mape', ascending=True)
+                    display_df.columns = ['State', 'Forecast Type', 'Forecast Horizon', 'Error Rate (MAPE)']
+                    display_df['Error Rate (MAPE)'] = display_df['Error Rate (MAPE)'].apply(lambda x: f"{x:.2f}%")
                     st.dataframe(display_df, use_container_width=True, hide_index=True)
     
     
@@ -1507,6 +1624,53 @@ def main():
                     
                     if state_name_field:
                         try:
+                            # ---------------------------------------------------------
+                            # FIX: Align data state names with GeoJSON state names
+                            # ---------------------------------------------------------
+                            # Get all state names from GeoJSON
+                            geojson_states = set()
+                            for feature in india_geojson['features']:
+                                if 'properties' in feature and state_name_field in feature['properties']:
+                                    geojson_states.add(feature['properties'][state_name_field])
+                            
+                            # Define specific mapping corrections (Data Name -> GeoJSON Name)
+                            name_replacements = {}
+                            
+                            # 1. Jammu & Kashmir
+                            if "Jammu and Kashmir" in geojson_states:
+                                # Data might have "Jammu And Kashmir" or "Jammu & Kashmir"
+                                if "Jammu And Kashmir" in state_map_data['state'].values:
+                                    name_replacements["Jammu And Kashmir"] = "Jammu and Kashmir"
+                                elif "Jammu & Kashmir" in state_map_data['state'].values:
+                                    name_replacements["Jammu & Kashmir"] = "Jammu and Kashmir"
+                            
+                            # 2. Andaman & Nicobar
+                            if "Andaman and Nicobar" in geojson_states:
+                                if "Andaman And Nicobar Islands" in state_map_data['state'].values:
+                                    name_replacements["Andaman And Nicobar Islands"] = "Andaman and Nicobar"
+                            
+                            # 3. Dadra & Nagar Haveli and Daman & Diu
+                            # GeoJSON might have them separate or combined. The debug output showed them separate.
+                            # "Dadra and Nagar Haveli", "Daman and Diu"
+                            # Data likely has "Dadra And Nagar Haveli And Daman And Diu"
+                            # This is tricky because one data row maps to two GeoJSON features.
+                            # For now, we can try to map to one of them or leave it (it might just show on one part).
+                            # If we want to show on both, we'd need to duplicate the row in data. 
+                            # Let's check if we can map to the larger one or just skip for now to avoid errors.
+                            
+                            # 4. Odisha / Orissa
+                            if "Orissa" in geojson_states and "Odisha" in state_map_data['state'].values:
+                                name_replacements["Odisha"] = "Orissa"
+                                
+                            # 5. Uttarakhand / Uttaranchal
+                            if "Uttaranchal" in geojson_states and "Uttarakhand" in state_map_data['state'].values:
+                                name_replacements["Uttarakhand"] = "Uttaranchal"
+
+                            # Apply replacements
+                            if name_replacements:
+                                state_map_data['state'] = state_map_data['state'].replace(name_replacements)
+                            # ---------------------------------------------------------
+
                             # Create choropleth map with proper boundaries
                             fig_map = px.choropleth(
                                 state_map_data,
