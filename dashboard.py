@@ -34,6 +34,13 @@ try:
 except ImportError:
     GEOJSON_HELPER_AVAILABLE = False
 
+# Import Forensic Analyzer
+try:
+    from forensic_analysis import ForensicAnalyzer
+    FORENSIC_AVAILABLE = True
+except ImportError:
+    FORENSIC_AVAILABLE = False
+
 # Page configuration
 st.set_page_config(
     page_title="UIDAI Analytics Dashboard | Government of India",
@@ -781,7 +788,7 @@ def main():
 
 
     # Dashboard tabs
-    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12 = st.tabs([
         "📈 Overview", 
         "📅 Temporal Analysis", 
         "🔮 Forecasting & Predictions",
@@ -792,7 +799,8 @@ def main():
         "🚨 Surge Predictions",
         "⚙️ Feature Engineering",
         "🏘️ District & Pincode Models",
-        "🎯 Actionable Insights"
+        "🎯 Actionable Insights",
+        "🕵️ Forensic Signal Intelligence"
     ])
     
     # Tab 1: Overview
@@ -3272,6 +3280,228 @@ def main():
             
             3. Refresh this dashboard to view the insights.
             """)
+
+    # Tab 12: Forensic Signal Intelligence
+    with tab12:
+        st.markdown('<div class="tab-description">Forensic-grade detection of statistical anomalies in adult enrollments.</div>', unsafe_allow_html=True)
+        st.header("🕵️ Enrollment Pattern Risk Intelligence (Forensic Signal)")
+        
+        if selected_state != 'All':
+            st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
+
+        if not FORENSIC_AVAILABLE:
+            st.error("⚠️ Forensic Analysis module (`forensic_analysis.py`) is missing or failed to load.")
+        else:
+            if 'enrolment' in data and 'biometric' in data and 'demographic' in data:
+                # Run Analysis
+                with st.spinner("Running forensic algorithms (Temporal, Spatial, Cross-Signal)..."):
+                    # Initialize with current data (already filtered by date/state)
+                    analyzer = ForensicAnalyzer(data['enrolment'], data['biometric'], data['demographic'])
+                    # Run analysis
+                    results_df = analyzer.run_analysis()
+                    # Get temporal summary
+                    temporal_df = analyzer.get_temporal_summary(interval='2M')
+                
+                if not temporal_df.empty:
+                    # --- TEMPORAL FORENSIC MAP ---
+                    st.subheader("🗺️ Temporal Forensic Map (2-Month Intervals)")
+                    
+                    # Date Slider
+                    unique_periods = sorted(temporal_df['period'].unique())
+                    period_labels = [p.strftime('%b %Y') for p in unique_periods]
+                    
+                    if len(period_labels) > 0:
+                        selected_label = st.select_slider(
+                            "Select Time Period",
+                            options=period_labels,
+                            value=period_labels[-1]
+                        )
+                        
+                        # Find corresponding timestamp
+                        selected_idx = period_labels.index(selected_label)
+                        selected_period = unique_periods[selected_idx]
+                        
+                        # Filter data by Period
+                        period_data = temporal_df[temporal_df['period'] == selected_period]
+
+                        # --- DRILL-DOWN FILTERS ---
+                        f_col1, f_col2, f_col3 = st.columns(3)
+                        with f_col1:
+                            # State Filter
+                            all_states = sorted(period_data['state'].unique().tolist())
+                            sel_state = st.selectbox("Filter by State", ["All"] + all_states, key='forensic_state')
+                        
+                        with f_col2:
+                            # District Filter
+                            if sel_state != "All":
+                                districts = sorted(period_data[period_data['state'] == sel_state]['district'].unique().tolist())
+                                sel_dist = st.selectbox("Filter by District", ["All"] + districts, key='forensic_dist')
+                            else:
+                                sel_dist = st.selectbox("Filter by District", ["All"], disabled=True, key='forensic_dist')
+                        
+                        with f_col3:
+                            # Pincode Filter (Optional search)
+                            if sel_dist != "All":
+                                pincodes = sorted(period_data[(period_data['state'] == sel_state) & (period_data['district'] == sel_dist)]['pincode'].unique().tolist())
+                                sel_pin = st.selectbox("Filter by Pincode", ["All"] + [str(p) for p in pincodes], key='forensic_pin')
+                            else:
+                                sel_pin = st.selectbox("Filter by Pincode", ["All"], disabled=True, key='forensic_pin')
+
+                        # Apply Filters
+                        filtered_view = period_data.copy()
+                        if sel_state != "All":
+                            filtered_view = filtered_view[filtered_view['state'] == sel_state]
+                        if sel_dist != "All":
+                            filtered_view = filtered_view[filtered_view['district'] == sel_dist]
+                        if sel_pin != "All":
+                             filtered_view = filtered_view[filtered_view['pincode'] == int(sel_pin)]
+
+                        # --- MAP VISUALIZATION (State Level) ---
+                        # Aggregate to State level for the map (uses filtered view to reflect selection)
+                        state_map_data = filtered_view.groupby('state')['risk_score_norm'].mean().reset_index()
+                        
+                        col1, col2 = st.columns([3, 1])
+                        
+                        with col1:
+                            if GEOJSON_HELPER_AVAILABLE:
+                                india_geojson = load_india_geojson()
+                                if india_geojson:
+                                    # Create choropleth
+                                    fig_map = px.choropleth(
+                                        state_map_data,
+                                        geojson=india_geojson,
+                                        locations='state',
+                                        featureidkey=f"properties.{get_state_name_field(india_geojson)}",
+                                        color='risk_score_norm',
+                                        color_continuous_scale='Reds',
+                                        title=f"Forensic Signal Intensity by State - {selected_label}",
+                                        labels={'risk_score_norm': 'Signal Intensity (Avg)'}
+                                    )
+                                    # Zoom to data bounds (filters)
+                                    fig_map.update_geos(fitbounds="locations", visible=False)
+                                    fig_map.update_layout(height=500, margin=dict(l=0, r=0, t=30, b=0))
+                                    st.plotly_chart(fig_map, use_container_width=True)
+                                else:
+                                    create_marker_fallback_map(state_map_data, 'risk_score_norm', 'Signal Intensity')
+                            else:
+                                create_marker_fallback_map(state_map_data, 'risk_score_norm', 'Signal Intensity')
+                                
+                        with col2:
+                            st.markdown(f"**{selected_label} Summary**")
+                            # Metrics based on FILTERED view
+                            total_adults = filtered_view['adult_enrollment'].sum()
+                            avg_signal = filtered_view['risk_score_norm'].mean()
+                            max_signal = filtered_view['risk_score_norm'].max()
+                            loc_count = len(filtered_view)
+                            
+                            st.metric("Total 18+ Enrollments", f"{int(total_adults):,}", help="Total adult enrollments in selected scope")
+                            st.metric("Avg Signal", f"{avg_signal:.1f}")
+                            st.metric("Max Signal", f"{max_signal:.1f}")
+                            st.metric("Areas Count", f"{loc_count}")
+                            
+                            st.markdown("---")
+                            if sel_state == "All":
+                                st.markdown("**Top Risk States**")
+                                top_items = state_map_data.nlargest(5, 'risk_score_norm')
+                                st.table(top_items.set_index('state')[['risk_score_norm']].style.format("{:.1f}"))
+                            elif sel_dist == "All":
+                                st.markdown(f"**Top Districts in {sel_state}**")
+                                dist_agg = filtered_view.groupby('district')['risk_score_norm'].mean().reset_index()
+                                top_items = dist_agg.nlargest(5, 'risk_score_norm')
+                                st.table(top_items.set_index('district')[['risk_score_norm']].style.format("{:.1f}"))
+                            else:
+                                st.markdown(f"**Pincodes in {sel_dist}**")
+                                top_items = filtered_view.nlargest(5, 'risk_score_norm')
+                                st.table(top_items.set_index('pincode')[['risk_score_norm']].style.format("{:.1f}"))
+
+                        # --- HIERARCHICAL AREA MAP (Treemap) ---
+                        st.subheader(f"🏘️ Area Implementation Analysis")
+                        st.caption("Hierarchical breakdown: State → District → Pincode (Size = Enrollment Volume, Color = Signal Intensity)")
+                        
+                        # Path for Treemap
+                        path_cols = ['state', 'district']
+                        if 'pincode' in filtered_view.columns:
+                            # Convert pincode to string for categorical plotting
+                            filtered_view['pincode_str'] = filtered_view['pincode'].astype(str)
+                            path_cols.append('pincode_str')
+                        
+                        # For Treemap, we need positive values for size. Use total_enrollment or 1 if 0.
+                        filtered_view['display_size'] = filtered_view['total_enrollment'].clip(lower=1)
+                        
+                        fig_tree = px.treemap(
+                            filtered_view,
+                            path=path_cols,
+                            values='display_size',
+                            color='risk_score_norm',
+                            color_continuous_scale='Reds',
+                            hover_data=['adult_enrollment', 'algo1_score', 'algo5_score'],
+                            title=f"Signal Intensity Distribution: {sel_state if sel_state != 'All' else 'All States'}"
+                        )
+                        fig_tree.update_layout(height=500)
+                        st.plotly_chart(fig_tree, use_container_width=True)
+
+                        # --- DETAILED LOCATION ANALYSIS ---
+                        st.subheader(f"📍 Detailed Forensic Data ({selected_label})")
+                        
+                        display_cols = ['state', 'district', 'adult_enrollment', 'risk_score_norm', 
+                                       'algo1_score', 'algo2_score', 'algo5_score']
+                        if 'pincode' in filtered_view.columns:
+                            display_cols.insert(2, 'pincode')
+                            
+                        detailed_view = filtered_view[display_cols].sort_values('risk_score_norm', ascending=False)
+                        
+                        # Rename columns for display (Safe Language)
+                        detailed_view_display = detailed_view.rename(columns={
+                            'risk_score_norm': 'Signal Intensity',
+                            'adult_enrollment': 'Enrollment Vol',
+                            'algo1_score': 'Temporal Dev',
+                            'algo2_score': 'Spatial Anom',
+                            'algo5_score': 'Demographic Ratio'
+                        })
+                        
+                        st.dataframe(
+                            detailed_view_display.head(1000).style.background_gradient(subset=['Signal Intensity'], cmap='Reds'),
+                            use_container_width=True,
+                            hide_index=True
+                        )
+                        
+                        csv_period = detailed_view_display.to_csv(index=False).encode('utf-8')
+                        st.download_button(
+                            f"Download Report ({selected_label})",
+                            csv_period,
+                            f"forensic_report_{selected_label.replace(' ', '_')}.csv",
+                            "text/csv",
+                            key=f'dl_{selected_idx}'
+                        )
+                    else:
+                        st.warning("Not enough data to generate timeline.")
+
+                    st.markdown("---")
+                    
+                    # --- ALGORITHM BREAKDOWN (Aggregated) ---
+                    st.subheader("Algorithm Contribution (All Time)")
+                    with st.expander("View Algorithm Performance Stats"):
+                        avg_scores = {
+                            'Temporal Deviation': results_df['algo1_score'].mean(),
+                            'Spatial Anomaly': results_df['algo2_score'].mean(),
+                            'Forecast Violation': results_df['algo3_score'].mean(),
+                            'Cross-Signal Integrity': results_df['algo4_score'].mean(),
+                            'Demographic Ratio': results_df['algo5_score'].mean()
+                        }
+                        
+                        fig = px.bar(
+                            x=list(avg_scores.values()),
+                            y=list(avg_scores.keys()),
+                            orientation='h',
+                            labels={'x': 'Avg Contribution', 'y': 'Algorithm'},
+                            title="Average Signal Contribution by Algorithm"
+                        )
+                        st.plotly_chart(fig, use_container_width=True)
+
+                else:
+                    st.info("No data available for analysis.")
+            else:
+                st.warning("Granular data (enrolment, biometric, demographic) not available for forensic analysis.")
 
 def create_marker_fallback_map(state_map_data, map_metric_col, map_metric_choice):
     """Fallback marker-based map when GeoJSON is not available"""

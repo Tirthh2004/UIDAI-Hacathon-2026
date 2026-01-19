@@ -1,16 +1,12 @@
 import streamlit as st
-import google.generativeai as genai
+from google import genai
 import os
 
 # --- 1. SETUP API ---
-def init_gemini():
+def get_api_key():
     if "GEMINI_API_KEY" in st.secrets:
-        try:
-            genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
-            return True
-        except Exception:
-            return False
-    return False
+        return st.secrets["GEMINI_API_KEY"]
+    return None
 
 # --- 2. LOAD KNOWLEDGE ---
 @st.cache_data(show_spinner=False)
@@ -29,12 +25,10 @@ def get_project_context():
     return combined_text
 
 
-# model = genai.GenerativeModel('gemini-pro') 
-# model = genai.GenerativeModel('gemini-3-flash-preview') 
 # --- 3. MAIN CHATBOT FUNCTION ---
 @st.fragment
 def display_chatbot():
-    init_gemini()
+    api_key = get_api_key()
     
     if "messages" not in st.session_state:
         st.session_state.messages = [{"role": "assistant", "content": "Hi! I analyze your dashboard data. Ask me anything."}]
@@ -62,8 +56,15 @@ def display_chatbot():
             context = get_project_context()
             last_q = st.session_state.messages[-1]["content"]
             try:
-                model = genai.GenerativeModel('gemini-3-flash-preview') 
-                response = model.generate_content(f"Context: {context}\n\nUser Question: {last_q}\nAnswer (short):")
+                if not api_key:
+                    st.error("Missing GEMINI_API_KEY in secrets.")
+                    return
+
+                client = genai.Client(api_key=api_key)
+                response = client.models.generate_content(
+                    model='gemini-2.0-flash',
+                    contents=f"Context: {context}\n\nUser Question: {last_q}\nAnswer (short):"
+                )
                 st.session_state.messages.append({"role": "assistant", "content": response.text})
                 st.rerun()
             except Exception as e:
