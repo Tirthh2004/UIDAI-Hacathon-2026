@@ -17,6 +17,7 @@ from datetime import datetime, date
 import warnings
 import json
 from chatbot import display_chatbot
+from utils_export import render_export_button
 warnings.filterwarnings('ignore')
 
 # Import Indian states coordinates and GeoJSON helper
@@ -813,7 +814,8 @@ def main():
             High-level summary of biometric and demographic updates and enrolments across India.
         </div>
         """, unsafe_allow_html=True)
-        
+        if 'daily' in data:
+            render_export_button(data['daily'], "Overview_Data", "tab1_export")
         st.header("Dashboard Overview")
         
         # Key metrics
@@ -963,6 +965,9 @@ def main():
     with tab2:
         st.markdown('<div class="tab-description">Analysis of daily, weekly, and monthly trends in update volumes.</div>', unsafe_allow_html=True)
         
+        if 'daily' in data:
+            render_export_button(data['daily'], "Temporal_Trends", "tab2_export")
+
         st.header("Temporal Pattern Analysis")
         if selected_state != 'All':
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
@@ -1319,6 +1324,13 @@ def main():
     # Tab 3: Forecasting & Predictions
     with tab3:
         st.markdown('<div class="tab-description">30 to 90-day projections for Aadhaar update workloads.</div>', unsafe_allow_html=True)
+        
+        # Export forecast data if available, otherwise daily data
+        if 'daily_forecasts' in data:
+            render_export_button(data['daily_forecasts'], "Forecasts", "tab3_export")
+        elif 'daily' in data:
+            render_export_button(data['daily'], "Forecast_Input_Data", "tab3_export")
+
         st.header("Forecasting & Predictions")
         if selected_state != 'All':
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
@@ -1600,6 +1612,9 @@ def main():
     # Tab 4: Geographic Analysis
     with tab4:
         st.markdown('<div class="tab-description">Spatial distribution of Aadhaar activity and state-wise comparisons.</div>', unsafe_allow_html=True)
+        
+        if 'state' in data:
+            render_export_button(data['state'], "Geographic_Data", "tab4_export")
         st.header("Geographic Distribution Analysis")
         if selected_state != 'All':
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
@@ -1729,6 +1744,9 @@ def main():
     # Tab 5: Age Group Analysis
     with tab5:
         st.markdown('<div class="tab-description">Analysis of updates across different demographic age groups.</div>', unsafe_allow_html=True)
+        
+        if 'daily' in data:
+            render_export_button(data['daily'], "Age_Group_Data", "tab5_export")
         st.header("Age Group Analysis")
         if selected_state != 'All':
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
@@ -1964,6 +1982,11 @@ def main():
     # Tab 6: Coverage & Anomalies
     with tab6:
         st.markdown('<div class="tab-description">Detection of service coverage gaps and unusual update spikes.</div>', unsafe_allow_html=True)
+        
+        if 'district_coverage' in data:
+            render_export_button(data['district_coverage'], "Coverage_Data", "tab6_export")
+        elif 'anomalies' in data:
+            render_export_button(data['anomalies'], "Anomaly_Data", "tab6_export")  
         st.header("Coverage & Anomaly Analysis")
         if selected_state != 'All':
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
@@ -2183,6 +2206,9 @@ def main():
     # Tab 7: Insights & Recommendations
     with tab7:
         st.markdown('<div class="tab-description">Actionable findings and prioritized recommendations.</div>', unsafe_allow_html=True)
+        
+        if 'insights' in data:
+            render_export_button(data['insights'], "Insights_Recommendations", "tab7_export")    
         st.header("Insights & Recommendations")
         if selected_state != 'All':
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
@@ -2305,6 +2331,9 @@ def main():
     # Tab 8: Surge Predictions
     with tab8:
         st.markdown('<div class="tab-description">Early warnings for upcoming surges based on age transitions and regional patterns.</div>', unsafe_allow_html=True)
+        
+        if 'surge_predictions' in data:
+            render_export_button(data['surge_predictions'], "Surge_Predictions", "tab8_export")
         st.header("🚨 Surge Prediction System")
         if selected_state != 'All':
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
@@ -2544,6 +2573,9 @@ def main():
     # Tab 9: Feature Engineering
     with tab9:
         st.markdown('<div class="tab-description">Engineered data variables used by the AI models.</div>', unsafe_allow_html=True)
+        
+        if 'features_daily' in data:
+            render_export_button(data['features_daily'], "Feature_Engineering_Data", "tab9_export")
         st.header("⚙️ Data Variable Insights")
         if selected_state != 'All':
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
@@ -2759,6 +2791,9 @@ def main():
     # Tab 10: District & Pincode Models
     with tab10:
         st.markdown('<div class="tab-description">Granular forecasting and anomaly detection at district and pincode levels.</div>', unsafe_allow_html=True)
+        
+        if 'district_forecasts' in data:
+            render_export_button(data['district_forecasts'], "District_Forecasts", "tab10_export")
         st.header("🏘️ District & Pincode Analysis")
         if selected_state != 'All':
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
@@ -3013,7 +3048,26 @@ def main():
     # Tab 11: Actionable Insights
     with tab11:
         st.markdown('<div class="tab-description">Synthesis of AI findings into task-oriented recommendations.</div>', unsafe_allow_html=True)
+        
+        # --- NEW EXPORT CODE STARTS HERE ---
+        # We try to export 'filtered_insights' if it exists, otherwise 'insights_df'
+        # We check locals() to see which dataframe is available to avoid errors
+        if 'filtered_insights' in locals():
+            export_df = filtered_insights
+        elif 'insights_df' in locals():
+            export_df = insights_df
+        elif 'actionable_insights' in data:
+            export_df = data['actionable_insights']
+        else:
+            export_df = None
+
+        if export_df is not None:
+            render_export_button(export_df, "Actionable_Insights", "tab11")
+        # --- NEW EXPORT CODE ENDS HERE ---
         st.header("🎯 Final Action Plans")
+        
+        if selected_state != 'All':
+            st.info(f"📍 **Currently viewing data for: {selected_state}**...")
         if selected_state != 'All':
             st.info(f"📍 **Currently viewing data for: {selected_state}** — Select 'All' in the sidebar to view national data.")
         
@@ -3286,6 +3340,11 @@ def main():
     # Tab 12: Forensic Signal Intelligence
     with tab12:
         st.markdown('<div class="tab-description">Forensic-grade detection of statistical anomalies in adult enrollments.</div>', unsafe_allow_html=True)
+        
+        # Forensic results are calculated on-the-fly, so we export the raw input data here
+        # (Detailed forensic reports have their own download button at the bottom of this tab)
+        if 'enrolment' in data:
+            render_export_button(data['enrolment'], "Forensic_Input_Data", "tab12_export")
         st.header("🕵️ Enrollment Pattern Risk Intelligence (Forensic Signal)")
         
         if selected_state != 'All':
